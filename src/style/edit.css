@@ -1,0 +1,69 @@
+/*
+  EDIT VIEW
+*/
+.journal-page-editor--faction {
+  .tab {
+    margin: 1rem;
+
+    &[data-tab].active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &[data-tab="notes"] {
+      .editor {
+        height: 100%;
+      }
+    }
+
+    .editor {
+      min-height: 10rem;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top: 0;
+      border-radius: 3px;
+    }    
+
+    .faction-control:not(:last-of-type) {
+      margin-bottom: 1em;
+    }
+  }
+
+  .sheet-tabs {
+    flex: 0;
+  }
+  
+  .reputation-controls {
+    display: grid;
+    grid-template-columns: 4em 1fr 4em;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1em;
+
+    span {
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  .faction-member-lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin-bottom: 1em;
+  }
+
+  .faction-members {
+    grid-template-columns: 1fr;
+  }
+   
+  .faction-relationships,
+  .faction-member-lists {
+    flex: 1;
+  }
+  .faction-relationships {
+    .editor {
+      height: calc(100% - 2em);
+    }
+  }
+}
+

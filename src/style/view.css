@@ -1,0 +1,85 @@
+/*
+  READ VIEW
+*/
+.journal-page-content--faction {
+  container-type: inline-size;
+  container-name: page;
+
+  .reputation-tracker {
+    display: grid;
+    grid-template-columns: 1fr 5em 1fr;
+    gap: 1em;
+  }
+
+  .reputation-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: .25em;
+    
+    meter {
+      width: 100%;
+    }
+
+    label {
+      order: 1;
+      align-self: start;
+      font-weight: 600;
+    }
+
+    &--infamy {
+      text-align: left;
+
+      meter {
+        transform: rotate(180deg)
+      }
+    }
+
+    &--reputation {
+      text-align: center;
+    }
+
+    &--fame {
+      text-align: right;
+    }
+  }
+
+  .faction-information {
+    &__detail {
+      margin-bottom: 1.25em;
+
+      @container page (min-width: 600px) {
+        margin-bottom: 0;
+      
+        &:not(:last-child) {
+          margin-bottom: 1em;
+        }
+      }
+    }
+      
+    &__members {
+      .faction-replacement {
+        margin-bottom: 1em;
+      }
+    
+      .faction-member-list:not(:last-of-type) {
+        margin-bottom: 1em;
+      }
+    }
+    
+    @container page (min-width: 600px) {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2em;
+    }
+  }
+
+  .faction-members {
+    .faction-member {
+      &:hover {
+        cursor: grab;
+      }
+    }
+  }
+}
+

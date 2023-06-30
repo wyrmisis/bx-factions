@@ -1,0 +1,42 @@
+{
+  "id": "bx-factions",
+  "title": "Faction Journal Pages",
+  "description": "A lightly-opinionated journal page type for factions, for use with games of the Basic-Expert lineage",
+  "authors": [
+    {
+      "name": "wyrmisis",
+      "discord": "wyrmisis"
+    }
+  ],
+  "esmodules": [
+    "dist/js/bundle.min.js"
+  ],
+  "styles": [
+    "dist/css/bundle.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "compatibility": {
+    "minimum": 11
+  },
+  "license": "LICENSE",
+  "version": "auto-replaced",
+  "url": "auto-replaced",
+  "manifest": "auto-replaced",
+  "download": "auto-replaced",
+  "documentTypes": {
+    "JournalEntryPage": {
+      "faction": {
+        "htmlFields": ["description", "notes", "renforcements", "territory", "relationships", "goals"],
+        "filePathFields": {
+          "img": ["IMAGE"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+export default class FactionDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * @todo Should goals, territory, and relationships be more strictly defined?
+   *  
+   */
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    return {
+      notes: new fields.HTMLField({required: false, blank: true}),
+      reinforcements: new fields.HTMLField({required: false, blank: true}),
+      description: new fields.HTMLField({required: false, blank: true}),
+      img: new fields.FilePathField({required: false, categories: ["IMAGE"]}),
+
+      alignment: new fields.StringField({
+        required: true,
+        blank: false,
+        choices: [
+          game.i18n.localize("FACTIONS.alignment.lawful"),
+          game.i18n.localize("FACTIONS.alignment.neutral"),
+          game.i18n.localize("FACTIONS.alignment.chaotic"),
+        ],
+        initial: game.i18n.localize("FACTIONS.alignment.neutral"),
+      }),
+      fame: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
+      infamy: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
+      
+      // goals: new fields.ArrayField(
+      //   new fields.StringField({required: false, blank: false})
+      // ),
+      // territory: new fields.ArrayField(
+      //   new fields.StringField({required: false, blank: false})
+      // ),
+
+      members: new fields.SchemaField({
+        notables: new fields.ArrayField(
+          new fields.StringField({required: false, blank: false})
+        ),
+        members: new fields.ArrayField(
+          new fields.SchemaField({
+            uuid: new fields.StringField({required: false, blank: false}),
+            number: new fields.NumberField({min: 0, integer: true})
+          })
+        )
+      }),
+      
+      relationships: new fields.HTMLField({required: false, blank: true}),
+      goals: new fields.HTMLField({required: false, blank: true}),
+      territory: new fields.HTMLField({required: false, blank: true}),
+
+      // relationships: new fields.ArrayField(
+      //   new fields.SchemaField({
+      //     factionName: new fields.StringField({required: false, blank: false}),
+      //     relationshipType: new fields.StringField({required: false, blank: false}) 
+      //   })
+      // )            
+    };
+  }
+
+  get reactionModifier() {
+    return 0 + this.fame - this.infamy;
+  }
+
+  /**
+   *  @returns {Promise[]} - An array of promises that make up the requested actors
+   */
+  get notableActors() {
+    return this.members.notables
+      .map(i => fromUuidSync(i))
+      .filter(i => !!i);
+  }
+
+  get memberActors() {
+    return this.members.members
+      .map(
+        ({ uuid, number }) => ({ actor: fromUuidSync(uuid), number })
+      )
+      .filter(({actor}) => !!actor);
+  }
+}

@@ -1,0 +1,177 @@
+<form class="{{cssClass}} flexcol journal-page-editor--faction" autocomplete="off">
+  {{> journalEntryPageHeader}}
+
+	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
+		<a class="item" data-tab="notes">{{localize "FACTIONS.edit.tabs.notes"}}</a>
+		<a class="item" data-tab="information">{{localize "FACTIONS.edit.tabs.information"}}</a>
+		<a class="item" data-tab="relationships">{{localize "FACTIONS.edit.tabs.relationships"}}</a>
+		<a class="item" data-tab="membership">{{localize "FACTIONS.edit.tabs.membership"}}</a>
+	</nav>
+
+	{{!--
+		The Notes tab contains an editor intended to be
+		frequently updated by the GM. Use it to track faction
+		changes, interactions with PCs, and so on.
+	--}}
+	<div class="tab" data-group="main" data-tab="notes">
+    {{editor notes
+			target="system.notes"
+			class="journal-page-content"
+			button=false
+			editable=true
+    	engine=editor.engine
+			collaborate=editor.collaborate
+		}}
+	</div>
+
+	{{!--
+		The Information tab contains less frequently updated
+		text-based info for the faction.
+	--}}
+	<div class="tab" data-group="main" data-tab="information">
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.description"}}</h2>
+	    {{editor description
+				target="system.description"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.goals"}}</h2>
+	    {{editor goals
+				target="system.goals"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+		
+		<div class="faction-control">
+		<h2>{{localize "FACTIONS.territory"}}</h2>
+    {{editor territory
+			target="system.territory"
+			class="journal-page-content"
+			button=false
+			editable=true
+    	engine=editor.engine
+			collaborate=editor.collaborate
+		}}
+		</div>
+	</div>
+	
+	{{!--
+		The Relationships tab contains controls related to the
+		faction's relationships with both the party and
+		other factions.
+	--}}
+	<div class="tab" data-group="main" data-tab="relationships">
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.reputation.label"}}</h2>
+			<div class="reputation-controls">
+				<label for="system.fame">{{localize "FACTIONS.reputation.fame"}}</label>
+				{{rangePicker
+					name="system.fame" 
+					value=data.system.fame 
+					min=document.system.schema.fields.fame.min 
+					max=document.system.schema.fields.fame.max 
+					step=1
+				}}
+				<label for="system.infamy">{{localize "FACTIONS.reputation.infamy"}}</label>
+				{{rangePicker
+					name="system.infamy" 
+					value=data.system.infamy 
+					min=document.system.schema.fields.infamy.min 
+					max=document.system.schema.fields.infamy.max 
+					step=1
+				}}
+			</div>	
+		</div>	
+	
+		<div class="faction-relationships faction-control">
+			<h2>{{localize "FACTIONS.relationships"}}</h2>
+	    {{editor relationships
+				target="system.relationships"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.alignment.label"}}</h2>
+			<select name="system.alignment" value="{{data.system.alignment}}">
+			{{#select data.system.alignment}}
+				{{#each alignmentOptions}}
+			  <option value="{{localize this}}">{{localize this}}</option>
+				{{/each}}
+			{{/select}}
+			</select>
+		</div>	
+		
+	</div>	
+
+	{{!--
+		The Membership tab contains a list of members, as well as
+		info on how the faction replenishes its membership numbers.
+
+		Notable members should have linked tokens.
+		Normal members should have unlinked tokens.
+	--}}
+	<div class="tab" data-group="main" data-tab="membership">
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.members.reinforcements"}}</h2>
+	    {{editor reinforcements
+				target="system.reinforcements"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+
+		<div class="faction-member-lists faction-control">
+			<section class="faction-member-list" data-list-type="notables">
+				<h2>{{localize "FACTIONS.members.notable"}}</h2>
+				{{#if notableActors}}
+					<ul class="faction-members faction-members--notable">
+						{{#each notableActors}}
+							<li class="faction-member faction-member--notable" data-uuid="{{uuid}}">
+								<img src="{{img}}" alt="{{name}}" />
+								<span>{{name}}</span>
+							</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<p class="empty">{{localize "FACTIONS.empty.notables.edit"}}</p>
+				{{/if}}
+			</section>
+
+			<section class="faction-member-list" data-list-type="members">
+				<h2>{{localize "FACTIONS.members.others"}}</h2>
+				{{#if memberActors.length}}
+					<ul class="faction-members faction-members--others">
+						{{#each memberActors}}
+							<li class="faction-member faction-member--member" data-uuid="{{actor.uuid}}">
+								<img src="{{actor.img}}" alt="{{actor.name}}" />
+								<span>{{actor.name}}</span>
+								{{numberInput number step=1 min=0 class="faction-member__quantity"}}
+							</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<p class="empty">{{localize "FACTIONS.empty.members.edit"}}</p>
+				{{/if}}
+			</section>
+		</div>		
+	</div>
+</form>
