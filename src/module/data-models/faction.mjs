@@ -9,17 +9,20 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
       notes: new fields.HTMLField({required: false, blank: true}),
       reinforcements: new fields.HTMLField({required: false, blank: true}),
       description: new fields.HTMLField({required: false, blank: true}),
-      img: new fields.FilePathField({required: false, categories: ["IMAGE"]}),
+      img: new fields.FilePathField({
+        required: false,
+        categories: ["IMAGE"],
+      }),
 
       alignment: new fields.StringField({
         required: true,
         blank: false,
         choices: [
-          game.i18n.localize("FACTIONS.alignment.lawful"),
-          game.i18n.localize("FACTIONS.alignment.neutral"),
-          game.i18n.localize("FACTIONS.alignment.chaotic"),
+          game.i18n.localize("FACTIONS.templates.faction.alignment.lawful"),
+          game.i18n.localize("FACTIONS.templates.faction.alignment.neutral"),
+          game.i18n.localize("FACTIONS.templates.faction.alignment.chaotic"),
         ],
-        initial: game.i18n.localize("FACTIONS.alignment.neutral"),
+        initial: game.i18n.localize("FACTIONS.templates.faction.alignment.neutral"),
       }),
       fame: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
       infamy: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),

@@ -16,6 +16,26 @@
       }
     }
 
+    .faction-banner {
+      max-width: 100%;
+      max-height: 100%;
+      margin-bottom: 1em;
+
+      &:is(&:not([src]), [src=""]) {
+        height: 3rem;
+        background: linear-gradient(160deg, #71DBD4, #642F6C);
+        position: relative;
+
+        &:after {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          content: "🖼️"
+        }
+      }
+    }
+
     .editor {
       min-height: 10rem;
       border: 2px solid rgba(0, 0, 0, 0.1);

@@ -63,10 +63,12 @@ export default class FactionSheet extends JournalTextPageSheet {
     context.reactionModifier = this.object.system.reactionModifier;
 
     context.alignmentOptions = [
-      "FACTIONS.alignment.lawful",
-      "FACTIONS.alignment.neutral",
-      "FACTIONS.alignment.chaotic"
+      "FACTIONS.templates.faction.alignment.lawful",
+      "FACTIONS.templates.faction.alignment.neutral",
+      "FACTIONS.templates.faction.alignment.chaotic"
     ];
+
+    context.canDisplayReputation = game.settings.get('bx-factions', 'useFactionRepModifiers');
     
     return context;
   }

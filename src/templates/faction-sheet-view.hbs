@@ -1,15 +1,19 @@
 {{#if data.title.show}}
 <header class="journal-page-header">
     <h{{data.title.level}}>{{data.name}} ({{data.system.alignment}})</h{{data.title.level}}>
+		{{#if document.system.img}}
+			<img src="{{document.system.img}}" />
+		{{/if}}
 </header>
 {{/if}}
 <section class="journal-page-content journal-page-content--faction">
 	<div class="faction-description">
 		{{{description}}}
 	</div>
+	{{#if canDisplayReputation}}
 	<article class="reputation-tracker">
 		<div class="reputation-item reputation-item--infamy">
-			<label for="faction-infamy">{{localize "FACTIONS.reputation.infamy"}}</label>
+			<label for="faction-infamy">{{localize "FACTIONS.templates.faction.reputation.infamy"}}</label>
 			<meter
 				id="faction-infamy"
 				name="faction-infamy"
@@ -19,11 +23,11 @@
 			</meter>
 		</div>
 		<div class="reputation-item reputation-item--reputation">
-			<label for="system.reputation">{{localize "FACTIONS.reputation.modifier"}}</label>
+			<label for="system.reputation">{{localize "FACTIONS.templates.faction.reputation.modifier"}}</label>
 			<input type="number" readonly value={{reactionModifier}} />
 		</div>
 		<div class="reputation-item reputation-item--fame">
-			<label for="faction-fame">{{localize "FACTIONS.reputation.fame"}}</label>
+			<label for="faction-fame">{{localize "FACTIONS.templates.faction.reputation.fame"}}</label>
 			<meter
 				id="faction-fame" 
 				name="faction-fame"
@@ -33,36 +37,36 @@
 			</meter>
 		</div>
 	</article>
+	{{/if}}
+
+	{{#if notes}}
+	<article class="notes">
+		<h2>{{localize "FACTIONS.templates.faction.notes"}}</h2>
+		{{{notes}}}
+	</article>
+	{{/if}}
 
 	<article class="faction-information">
 		<div class="faction-information__details">
 			<div class="faction-information__detail faction-information__detail--goals">
-				<h2>{{localize "FACTIONS.goals"}}</h2>
+				<h2>{{localize "FACTIONS.templates.faction.goals"}}</h2>
 				{{#if goals}}
 					{{{goals}}}
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.goals"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.goals"}}</p>
 				{{/if}}
 			</div>
 			<div class="faction-information__detail faction-information__detail--territory">
-				<h2>{{localize "FACTIONS.territory"}}</h2>
+				<h2>{{localize "FACTIONS.templates.faction.territory"}}</h2>
 				{{#if territory}}
 					{{editor territory target="system.territory" engine=editor.engine editable=false}}
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.territory"}}</p>
-				{{/if}}
-			</div>
-			<div class="faction-information__detail faction-information__detail--relationships">
-				<h2>{{localize "FACTIONS.relationships"}}</h2>
-				{{#if relationships}}
-					{{editor relationships engine=editor.engine target="system.relationships" editable=false}}
-				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.relationships"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.territory"}}</p>
 				{{/if}}
 			</div>
 		</div>
 		<div class="faction-information__members">
-			<h2>{{localize "FACTIONS.members.label"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.members.label"}}</h2>
 
 			{{#if reinforcements}}
 			{{!-- Replenishment/Reinforcement --}}
@@ -70,7 +74,7 @@
 			{{/if}}
 
 			<section class="faction-member-list">
-				<h3>{{localize "FACTIONS.members.notable"}}</h3>
+				<h3>{{localize "FACTIONS.templates.faction.members.notable"}}</h3>
 				{{#if (gt notableActors.length 0)}}
 					<ul class="faction-members faction-members--notable">
 						{{#each notableActors}}
@@ -81,12 +85,12 @@
 						{{/each}}
 					</ul>
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.notables.view"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.notables.view"}}</p>
 				{{/if}}
 			</section>
 
 			<section class="faction-member-list">
-				<h3>{{localize "FACTIONS.members.others"}}</h3>
+				<h3>{{localize "FACTIONS.templates.faction.members.others"}}</h3>
 				{{#if (gt memberActors.length 0)}}
 					<ul class="faction-members faction-members--others">
 						{{#each memberActors}}
@@ -98,20 +102,19 @@
 						{{/each}}
 					</ul>
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.members.view"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.members.view"}}</p>
 				{{/if}}
 			</section>
 		</div>
 	</article>
-
-	{{#if owner}}
 	<article class="notes">
-		<h2>{{localize "FACTIONS.notes"}}</h2>
-		{{#if notes}}
-			{{{notes}}}
-		{{else}}
-			<p class="empty">{{localize "FACTIONS.empty.notes"}}</p>
-		{{/if}}
-	</article
-	{{/if}}
+		<div class="faction-information__detail faction-information__detail--relationships">
+			<h2>{{localize "FACTIONS.templates.faction.relationships"}}</h2>
+			{{#if relationships}}
+				{{editor relationships engine=editor.engine target="system.relationships" editable=false}}
+			{{else}}
+				<p class="empty">{{localize "FACTIONS.templates.faction.empty.relationships"}}</p>
+			{{/if}}
+		</div>
+	</article>
 </section>

@@ -2,10 +2,10 @@
   {{> journalEntryPageHeader}}
 
 	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
-		<a class="item" data-tab="notes">{{localize "FACTIONS.edit.tabs.notes"}}</a>
-		<a class="item" data-tab="information">{{localize "FACTIONS.edit.tabs.information"}}</a>
-		<a class="item" data-tab="relationships">{{localize "FACTIONS.edit.tabs.relationships"}}</a>
-		<a class="item" data-tab="membership">{{localize "FACTIONS.edit.tabs.membership"}}</a>
+		<a class="item" data-tab="notes">{{localize "FACTIONS.templates.faction.edit.tabs.notes"}}</a>
+		<a class="item" data-tab="information">{{localize "FACTIONS.templates.faction.edit.tabs.information"}}</a>
+		<a class="item" data-tab="relationships">{{localize "FACTIONS.templates.faction.edit.tabs.relationships"}}</a>
+		<a class="item" data-tab="membership">{{localize "FACTIONS.templates.faction.edit.tabs.membership"}}</a>
 	</nav>
 
 	{{!--
@@ -29,8 +29,10 @@
 		text-based info for the faction.
 	--}}
 	<div class="tab" data-group="main" data-tab="information">
+		<img data-edit="system.img" src="{{document.system.img}}" class="faction-banner" />
+
 		<div class="faction-control">
-			<h2>{{localize "FACTIONS.description"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.description"}}</h2>
 	    {{editor description
 				target="system.description"
 				class="journal-page-content"
@@ -42,7 +44,7 @@
 		</div>
 
 		<div class="faction-control">
-			<h2>{{localize "FACTIONS.goals"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.goals"}}</h2>
 	    {{editor goals
 				target="system.goals"
 				class="journal-page-content"
@@ -54,7 +56,7 @@
 		</div>
 		
 		<div class="faction-control">
-		<h2>{{localize "FACTIONS.territory"}}</h2>
+		<h2>{{localize "FACTIONS.templates.faction.territory"}}</h2>
     {{editor territory
 			target="system.territory"
 			class="journal-page-content"
@@ -72,10 +74,11 @@
 		other factions.
 	--}}
 	<div class="tab" data-group="main" data-tab="relationships">
+		{{#if canDisplayReputation}}
 		<div class="faction-control">
-			<h2>{{localize "FACTIONS.reputation.label"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.reputation.label"}}</h2>
 			<div class="reputation-controls">
-				<label for="system.fame">{{localize "FACTIONS.reputation.fame"}}</label>
+				<label for="system.fame">{{localize "FACTIONS.templates.faction.reputation.fame"}}</label>
 				{{rangePicker
 					name="system.fame" 
 					value=data.system.fame 
@@ -83,7 +86,7 @@
 					max=document.system.schema.fields.fame.max 
 					step=1
 				}}
-				<label for="system.infamy">{{localize "FACTIONS.reputation.infamy"}}</label>
+				<label for="system.infamy">{{localize "FACTIONS.templates.faction.reputation.infamy"}}</label>
 				{{rangePicker
 					name="system.infamy" 
 					value=data.system.infamy 
@@ -92,10 +95,11 @@
 					step=1
 				}}
 			</div>	
-		</div>	
+		</div>
+		{{/if}}
 	
 		<div class="faction-relationships faction-control">
-			<h2>{{localize "FACTIONS.relationships"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.relationships"}}</h2>
 	    {{editor relationships
 				target="system.relationships"
 				class="journal-page-content"
@@ -107,7 +111,7 @@
 		</div>
 
 		<div class="faction-control">
-			<h2>{{localize "FACTIONS.alignment.label"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.alignment.label"}}</h2>
 			<select name="system.alignment" value="{{data.system.alignment}}">
 			{{#select data.system.alignment}}
 				{{#each alignmentOptions}}
@@ -128,7 +132,7 @@
 	--}}
 	<div class="tab" data-group="main" data-tab="membership">
 		<div class="faction-control">
-			<h2>{{localize "FACTIONS.members.reinforcements"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.members.reinforcements"}}</h2>
 	    {{editor reinforcements
 				target="system.reinforcements"
 				class="journal-page-content"
@@ -141,7 +145,7 @@
 
 		<div class="faction-member-lists faction-control">
 			<section class="faction-member-list" data-list-type="notables">
-				<h2>{{localize "FACTIONS.members.notable"}}</h2>
+				<h2>{{localize "FACTIONS.templates.faction.members.notable"}}</h2>
 				{{#if notableActors}}
 					<ul class="faction-members faction-members--notable">
 						{{#each notableActors}}
@@ -152,12 +156,12 @@
 						{{/each}}
 					</ul>
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.notables.edit"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.notables.edit"}}</p>
 				{{/if}}
 			</section>
 
 			<section class="faction-member-list" data-list-type="members">
-				<h2>{{localize "FACTIONS.members.others"}}</h2>
+				<h2>{{localize "FACTIONS.templates.faction.members.others"}}</h2>
 				{{#if memberActors.length}}
 					<ul class="faction-members faction-members--others">
 						{{#each memberActors}}
@@ -169,7 +173,7 @@
 						{{/each}}
 					</ul>
 				{{else}}
-					<p class="empty">{{localize "FACTIONS.empty.members.edit"}}</p>
+					<p class="empty">{{localize "FACTIONS.templates.faction.empty.members.edit"}}</p>
 				{{/if}}
 			</section>
 		</div>		

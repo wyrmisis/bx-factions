@@ -1,43 +1,79 @@
 {
-  "TYPES.JournalEntryPage.bx-factions.faction": "Faction",
+  "TYPES.JournalEntryPage.bx-factions": {
+    "faction": "Faction",
+    "roomKey": "Dungeon Room Key",
+    "levelOverview": "Dungeon Level Overview"
+  },
 
-  "FACTIONS.sheet": "Faction Sheet",
-  
-  "FACTIONS.name": "Name",
-  
-  "FACTIONS.reputation.label": "Player reputation",
-  "FACTIONS.reputation.fame": "Fame",
-  "FACTIONS.reputation.infamy": "Infamy",
-  "FACTIONS.reputation.modifier": "Reaction modifier",
-  
-  "FACTIONS.alignment.label": "Faction alignment",
-  "FACTIONS.alignment.lawful": "Lawful",
-  "FACTIONS.alignment.neutral": "Neutral",
-  "FACTIONS.alignment.chaotic": "Chaotic",
-  
-  "FACTIONS.goals": "Goals",
-  "FACTIONS.territory": "Holdings/Territory",
-  "FACTIONS.relationships": "Relationships with other factions",
-  "FACTIONS.description": "Description",
-  "FACTIONS.notes": "Notes",
-  
-  "FACTIONS.members.label": "Membership",
-  "FACTIONS.members.notable": "Notable individuals",
-  "FACTIONS.members.others": "Members",
-  "FACTIONS.members.reinforcements": "Reinforcement procedures",
+  "FACTIONS": {
+    "settings": {
+      "useFactionRepModifiers": {
+        "label": "Use Faction Reputation Modifiers",
+        "hint": "Enables controls for and display of UI elements related to fame/infamy trackers for reaction modifiers."
+      }
+    },
 
-  "FACTIONS.edit.tabs.notes": "Notes",
-  "FACTIONS.edit.tabs.information": "Faction Information",
-  "FACTIONS.edit.tabs.relationships": "Relationships and Party Reputation",
-  "FACTIONS.edit.tabs.membership": "Membership",
-
-  "FACTIONS.empty.goals": "This faction has no recorded goals",
-  "FACTIONS.empty.territory": "This faction has no recorded territory",
-  "FACTIONS.empty.relationships": "This faction has no recorded relationships",
-  "FACTIONS.empty.notes": "No notes have been recorded about this faction",
+    "templates": {
+      "faction": {
+        "sheetName": "Faction Sheet",
   
-  "FACTIONS.empty.notables.view": "This faction has no notable individuals",
-  "FACTIONS.empty.notables.edit": "This faction has no notable individuals. Drag Actors to add them to this faction",
-  "FACTIONS.empty.members.view": "This faction has no members",
-  "FACTIONS.empty.members.edit": "This faction has no members. Drag Actors to add them to this faction"
+        "name": "Name",
+        
+        "reputation": {
+          "label": "Player reputation",
+          "fame": "Fame",
+          "infamy": "Infamy",
+          "modifier": "Reaction modifier"
+        },
+        
+        "alignment": {
+          "label": "Faction alignment",
+          "lawful": "Lawful",
+          "neutral": "Neutral",
+          "chaotic": "Chaotic"
+        },
+        
+        "goals": "Goals",
+        "territory": "Holdings/Territory",
+        "relationships": "Relationships with other factions",
+        "description": "Description",
+        "notes": "Notes",
+        
+        "members": {
+          "label": "Membership",
+          "notable": "Notable individuals",
+          "others": "Members",
+          "reinforcements": "Reinforcement procedures"
+        },
+
+        "edit": {
+          "tabs.notes": "Notes",
+          "tabs.information": "Faction Information",
+          "tabs.relationships": "Relationships and Party Reputation",
+          "tabs.membership": "Membership"
+        },
+
+        "empty": {
+          "goals": "This faction has no recorded goals",
+          "territory": "This faction has no recorded territory",
+          "relationships": "This faction has no recorded relationships",
+          "notes": "No notes have been recorded about this faction",
+          "notables": {
+            "view": "This faction has no notable individuals",
+            "edit": "This faction has no notable individuals. Drag Actors to add them to this faction"
+          },
+          "members": {
+            "view": "This faction has no members",
+            "edit": "This faction has no members. Drag Actors to add them to this faction"
+          }
+        }       
+      },
+      "roomKey": {
+        "sheetName": "Room Key Sheet"
+      },
+      "levelOverview": {
+        "sheetName": "Dungeon Level Overview Sheet"
+      }
+    }
+  }
 }
