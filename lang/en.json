@@ -34,7 +34,8 @@
         },
         
         "goals": "Goals",
-        "territory": "Holdings/Territory",
+        "territory": "Holdings and Territory",
+        "resources": "Resources",
         "relationships": "Relationships with other factions",
         "description": "Description",
         "notes": "Notes",
@@ -48,8 +49,9 @@
 
         "edit": {
           "tabs.notes": "Notes",
-          "tabs.information": "Faction Information",
-          "tabs.relationships": "Relationships and Party Reputation",
+          "tabs.information": "Details",
+          "tabs.resources": "Territory/Resources",
+          "tabs.relationships": "Relationships/Party Reputation",
           "tabs.membership": "Membership"
         },
 
@@ -58,6 +60,7 @@
           "territory": "This faction has no recorded territory",
           "relationships": "This faction has no recorded relationships",
           "notes": "No notes have been recorded about this faction",
+          "resources": "This faction has no recorded resources",
           "notables": {
             "view": "This faction has no notable individuals",
             "edit": "This faction has no notable individuals. Drag Actors to add them to this faction"
