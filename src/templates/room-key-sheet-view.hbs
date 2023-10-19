@@ -1,0 +1,96 @@
+{{#if data.title.show}}
+<header class="journal-page-header">
+    <h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
+		{{#if document.system.img}}
+			<img src="{{document.system.img}}" />
+		{{/if}}
+</header>
+{{/if}}
+
+<section class="journal-page-content journal-page-content--faction">
+	<article class="faction-information">
+		<div class="faction-information__details">
+			
+      <div class="faction-information__detail faction-information__detail--description">
+				{{#if description}}
+					{{{description}}}
+				{{else}}
+					<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.description"}}</p>
+				{{/if}}
+			</div>
+
+			{{#if secrets}}
+			<div class="faction-information__detail faction-information__detail--resources">
+				<h2>{{localize "FACTIONS.templates.roomKey.secrets"}}</h2>
+				{{editor secrets target="system.secrets" engine=editor.engine editable=false}}
+			</div>
+			{{/if}}
+
+      {{#if traps}}
+			<div class="faction-information__detail faction-information__detail--resources">
+				<h2>{{localize "FACTIONS.templates.roomKey.traps"}}</h2>
+				{{editor traps target="system.traps" engine=editor.engine editable=false}}
+			</div>
+			{{/if}}
+
+		</div>
+
+		<div class="faction-information__members">
+			<section class="faction-member-list">
+			  <h2>{{localize "FACTIONS.templates.roomKey.inhabitants"}}</h2>
+        {{#if inhabitantNotes}}
+          {{{inhabitantNotes}}}
+        {{/if}}
+
+				{{#if (gt inhabitants.length 0)}}
+					<ul class="faction-members faction-members--others">
+						{{#each inhabitants}}
+              {{#with actor}}
+                <li class="faction-member" data-uuid="{{uuid}}">
+                  <img src="{{img}}" alt="{{name}}" />
+                  <span>{{name}}</span>
+								  <span>{{../number}}x</span>
+                </li>
+              {{/with}}
+						{{/each}}
+					</ul>
+				{{/if}}
+
+				{{#if (eq inhabitants.length 0)}}
+				  {{#unless inhabitantNotes}}
+					  <p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.view"}}</p>
+          {{/unless}}
+        {{/if}}
+			</section>
+
+      <section class="faction-member-list">
+			  <h2>{{localize "FACTIONS.templates.roomKey.treasure"}}</h2>
+        {{#if treasureNotes}}
+          {{{treasureNotes}}}
+        {{/if}}
+
+				{{#if (gt treasure.length 0)}}
+					<ul class="faction-members faction-members--others">
+						{{#each treasure}}
+              {{#with item}}
+                <li class="faction-member" data-uuid="{{uuid}}">
+                  <img src="{{img}}" alt="{{name}}" />
+                  <span>{{name}}</span>
+  								<span>{{../number}}x</span>
+                </li>
+              {{/with}}
+						{{/each}}
+					</ul>
+				{{/if}}
+
+				{{#if (eq treasure.length 0)}}
+				  {{#unless treasureNotes}}
+					  <p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.view"}}</p>
+          {{/unless}}
+        {{/if}}
+			</section>
+
+			
+		</div>
+	</article>
+</section>

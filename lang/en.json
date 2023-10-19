@@ -48,11 +48,13 @@
         },
 
         "edit": {
-          "tabs.notes": "Notes",
-          "tabs.information": "Details",
-          "tabs.resources": "Territory/Resources",
-          "tabs.relationships": "Relationships/Party Reputation",
-          "tabs.membership": "Membership"
+          "tabs": {
+            "notes": "Notes",
+            "information": "Details",
+            "resources": "Territory/Resources",
+            "relationships": "Relationships/Party Reputation",
+            "membership": "Membership"
+          }
         },
 
         "empty": {
@@ -72,7 +74,38 @@
         }       
       },
       "roomKey": {
-        "sheetName": "Room Key Sheet"
+        "sheetName": "Room Key Sheet",
+
+        "description": "Description",
+        "secrets": "Secrets",
+        "traps": "Traps",
+        "treasure": "Treasure",
+        "treasureNotes": "Notes",
+        "inhabitants": "Inhabitants",
+        "inhabitantNotes": "Notes",
+
+        "edit": {
+          "tabs": {
+            "description": "Description",
+            "inhabitants": "Inhabitants",
+            "treasure": "Treasure",
+            "secrets": "Secrets"
+          }
+        },
+
+        "empty": {
+          "description": "This room has no description",
+          "secrets": "This room has no secrets",
+          "traps": "This room has no traps",
+          "treasure": {
+            "view": "This room has no treasure",
+            "edit": "This room has no treasure. Drag Items to add them to this room"
+          },
+          "inhabitants": {
+            "view": "This room has no inhabitants",
+            "edit": "This room has no inhabitants. Drag Actors to add them to this room"
+          }
+        }
       },
       "levelOverview": {
         "sheetName": "Dungeon Level Overview Sheet"

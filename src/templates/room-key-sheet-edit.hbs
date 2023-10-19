@@ -1,0 +1,132 @@
+<form class="{{cssClass}} flexcol journal-page-editor--faction journal-page-editor--room-key journal-page-editor--from-bx-factions" autocomplete="off">
+  {{> journalEntryPageHeader}}
+
+	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
+		<a class="item" data-tab="description">{{localize "FACTIONS.templates.roomKey.edit.tabs.description"}}</a>
+		<a class="item" data-tab="inhabitants">{{localize "FACTIONS.templates.roomKey.edit.tabs.inhabitants"}}</a>
+		<a class="item" data-tab="treasure">{{localize "FACTIONS.templates.roomKey.edit.tabs.treasure"}}</a>
+		<a class="item" data-tab="secrets">{{localize "FACTIONS.templates.roomKey.edit.tabs.secrets"}}</a>
+	</nav>
+
+	{{!--
+		The Notes tab contains an editor intended to be
+		frequently updated by the GM. Use it to track faction
+		changes, interactions with PCs, and so on.
+	--}}
+	<div class="tab" data-group="main" data-tab="description">
+		<img data-edit="system.img" src="{{document.system.img}}" class="faction-banner" />
+
+    {{editor description
+			target="system.description"
+			class="journal-page-content"
+			button=false
+			editable=true
+    	engine=editor.engine
+			collaborate=editor.collaborate
+		}}
+	</div>
+
+	{{!--
+		The Information tab contains less frequently updated
+		text-based info for the faction.
+	--}}
+	<div class="tab" data-group="main" data-tab="secrets">
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.roomKey.secrets"}}</h2>
+	    {{editor secrets
+				target="system.secrets"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.roomKey.traps"}}</h2>
+	    {{editor traps
+				target="system.traps"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+	</div>
+
+	{{!--
+		The Inhabitants tab contains a list of inhabitants of this room
+		as well as notes on said inhabitants.
+	--}}
+	<div class="tab" data-group="main" data-tab="inhabitants">
+		<div class="faction-control">
+			<section class="faction-member-list" data-list-type="members">
+				<h2>{{localize "FACTIONS.templates.roomKey.inhabitants"}}</h2>
+				{{#if inhabitants.length}}
+					<ul class="faction-members faction-members--others">
+						{{#each inhabitants}}
+							<li class="faction-member faction-member--member" data-uuid="{{actor.uuid}}">
+								<img src="{{actor.img}}" alt="{{actor.name}}" />
+								<span>{{actor.name}}</span>
+								{{numberInput number step=1 min=0 class="faction-member__quantity"}}
+							</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.edit"}}</p>
+				{{/if}}
+			</section>
+		</div>
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.roomKey.inhabitantNotes"}}</h2>
+	    {{editor inhabitantNotes
+				target="system.inhabitantNotes"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+	</div>
+
+	{{!--
+		The Treasure tab contains a list of treasure in this room
+		as well as notes on said inhabitants.
+	--}}
+	<div class="tab" data-group="main" data-tab="treasure">
+		<div class="faction-control">
+			<section class="faction-member-list" data-list-type="members">
+				<h2>{{localize "FACTIONS.templates.roomKey.treasure"}}</h2>
+				{{#if treasure.length}}
+					<ul class="faction-members faction-members--others">
+						{{#each treasure}}
+							<li class="faction-member" data-uuid="{{item.uuid}}">
+								<img src="{{item.img}}" alt="{{item.name}}" />
+								<span>{{item.name}}</span>
+								{{numberInput number step=1 min=0 class="faction-member__quantity"}}
+							</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.edit"}}</p>
+				{{/if}}
+			</section>
+		</div>		
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.roomKey.treasureNotes"}}</h2>
+	    {{editor treasureNotes
+				target="system.treasureNotes"
+				class="journal-page-content"
+				button=false
+				editable=true
+	    	engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+	</div>
+</form>
