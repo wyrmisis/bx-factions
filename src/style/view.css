@@ -5,6 +5,12 @@
   container-type: inline-size;
   container-name: page;
 
+  & > article {
+    &:not(:last-of-type) {
+      margin-bottom: .5em;
+    }
+  }
+
   .reputation-tracker {
     display: grid;
     grid-template-columns: 1fr 5em 1fr;
@@ -53,6 +59,15 @@
       
         &:not(:last-child) {
           margin-bottom: 1em;
+        }
+      }
+
+      .editor-content > * {
+        &:first-of-type {
+          margin-top: 0;
+        }
+        &:last-of-type {
+          margin-bottom: 0;
         }
       }
     }

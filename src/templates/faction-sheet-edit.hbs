@@ -4,6 +4,7 @@
 	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
 		<a class="item" data-tab="notes">{{localize "FACTIONS.templates.faction.edit.tabs.notes"}}</a>
 		<a class="item" data-tab="information">{{localize "FACTIONS.templates.faction.edit.tabs.information"}}</a>
+		<a class="item" data-tab="territory">{{localize "FACTIONS.templates.faction.edit.tabs.resources"}}</a>
 		<a class="item" data-tab="relationships">{{localize "FACTIONS.templates.faction.edit.tabs.relationships"}}</a>
 		<a class="item" data-tab="membership">{{localize "FACTIONS.templates.faction.edit.tabs.membership"}}</a>
 	</nav>
@@ -54,17 +55,31 @@
 				collaborate=editor.collaborate
 			}}
 		</div>
-		
+	</div>
+
+	<div class="tab" data-group="main" data-tab="territory">
 		<div class="faction-control">
-		<h2>{{localize "FACTIONS.templates.faction.territory"}}</h2>
-    {{editor territory
-			target="system.territory"
-			class="journal-page-content"
-			button=false
-			editable=true
-    	engine=editor.engine
-			collaborate=editor.collaborate
-		}}
+			<h2>{{localize "FACTIONS.templates.faction.territory"}}</h2>
+			{{editor territory
+				target="system.territory"
+				class="journal-page-content"
+				button=false
+				editable=true
+				engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.faction.resources"}}</h2>
+			{{editor resources
+				target="system.resources"
+				class="journal-page-content"
+				button=false
+				editable=true
+				engine=editor.engine
+				collaborate=editor.collaborate
+			}}
 		</div>
 	</div>
 	
@@ -74,6 +89,16 @@
 		other factions.
 	--}}
 	<div class="tab" data-group="main" data-tab="relationships">
+		<div class="faction-control">
+			<h2>{{localize "FACTIONS.templates.faction.alignment.label"}}</h2>
+			<select name="system.alignment" value="{{data.system.alignment}}">
+			{{#select data.system.alignment}}
+				{{#each alignmentOptions}}
+			  <option value="{{localize this}}">{{localize this}}</option>
+				{{/each}}
+			{{/select}}
+			</select>
+		</div>	
 		{{#if canDisplayReputation}}
 		<div class="faction-control">
 			<h2>{{localize "FACTIONS.templates.faction.reputation.label"}}</h2>
@@ -109,18 +134,6 @@
 				collaborate=editor.collaborate
 			}}
 		</div>
-
-		<div class="faction-control">
-			<h2>{{localize "FACTIONS.templates.faction.alignment.label"}}</h2>
-			<select name="system.alignment" value="{{data.system.alignment}}">
-			{{#select data.system.alignment}}
-				{{#each alignmentOptions}}
-			  <option value="{{localize this}}">{{localize this}}</option>
-				{{/each}}
-			{{/select}}
-			</select>
-		</div>	
-		
 	</div>	
 
 	{{!--

@@ -3,17 +3,11 @@
 */
 .journal-page-editor--faction {
   .tab {
-    margin: 1rem;
+    margin: 0 1rem 1rem;
 
     &[data-tab].active {
       display: flex;
       flex-direction: column;
-    }
-
-    &[data-tab="notes"] {
-      .editor {
-        height: 100%;
-      }
     }
 
     .faction-banner {
@@ -41,10 +35,19 @@
       border: 2px solid rgba(0, 0, 0, 0.1);
       border-top: 0;
       border-radius: 3px;
+      height: 100%;
     }    
 
-    .faction-control:not(:last-of-type) {
-      margin-bottom: 1em;
+    .faction-control {
+      
+      &:has(.editor) {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      &:not(:last-of-type) {
+        margin-bottom: 1em;
+      }
     }
   }
 
@@ -54,7 +57,7 @@
   
   .reputation-controls {
     display: grid;
-    grid-template-columns: 4em 1fr 4em;
+    grid-template-columns: 4em 1fr 4em 4em 1fr 4em;
     align-items: center;
     gap: .5rem;
     margin-bottom: 1em;

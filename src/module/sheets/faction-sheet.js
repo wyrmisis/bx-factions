@@ -57,6 +57,12 @@ export default class FactionSheet extends JournalTextPageSheet {
       secrets: this.object.isOwner,
       relativeTo: this.object
     });
+    context.resources = await TextEditor.enrichHTML(
+      falsyIfEmptyP(this.object.system.resources), {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    });
     context.notableActors = await Promise.all(this.object.system.notableActors);
     context.memberActors = await Promise.all(this.object.system.memberActors);
 

@@ -26,13 +26,6 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
       }),
       fame: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
       infamy: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
-      
-      // goals: new fields.ArrayField(
-      //   new fields.StringField({required: false, blank: false})
-      // ),
-      // territory: new fields.ArrayField(
-      //   new fields.StringField({required: false, blank: false})
-      // ),
 
       members: new fields.SchemaField({
         notables: new fields.ArrayField(
@@ -49,13 +42,7 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
       relationships: new fields.HTMLField({required: false, blank: true}),
       goals: new fields.HTMLField({required: false, blank: true}),
       territory: new fields.HTMLField({required: false, blank: true}),
-
-      // relationships: new fields.ArrayField(
-      //   new fields.SchemaField({
-      //     factionName: new fields.StringField({required: false, blank: false}),
-      //     relationshipType: new fields.StringField({required: false, blank: false}) 
-      //   })
-      // )            
+      resources: new fields.HTMLField({required: false, blank: true}),
     };
   }
 

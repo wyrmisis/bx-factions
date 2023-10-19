@@ -64,6 +64,12 @@
 					<p class="empty">{{localize "FACTIONS.templates.faction.empty.territory"}}</p>
 				{{/if}}
 			</div>
+			{{#if resources}}
+			<div class="faction-information__detail faction-information__detail--resources">
+				<h2>{{localize "FACTIONS.templates.faction.resources"}}</h2>
+				{{editor resources target="system.resources" engine=editor.engine editable=false}}
+			</div>
+			{{/if}}
 		</div>
 		<div class="faction-information__members">
 			<h2>{{localize "FACTIONS.templates.faction.members.label"}}</h2>
