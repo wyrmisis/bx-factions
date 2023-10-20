@@ -38,6 +38,7 @@
         "filePathFields": {
           "img": ["IMAGE"]
         }
+      },
       "roomKey": {
         "htmlFields": ["description", "inhabitantNotes", "treasureNotes", "traps", "secrets" ],
         "filePathFields": {
