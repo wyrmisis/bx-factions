@@ -1,20 +1,13 @@
-export default class FactionSheet extends JournalTextPageSheet {
 
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      tabs: [{navSelector: ".tabs", contentSelector: "form", initial: "notes"}],
-      submitOnChange: true,
-      dragDrop: [
-        {
-          dragSelector: ".journal-page-content .faction-member",
-        }
-      ]
-    });
+import BXTemplateBaseSheet from "./__base-sheet";
+
+export default class RoomKeySheet extends BXTemplateBaseSheet {
+  static ListTypes = {
+    inhabitant: 'inhabitant',
+    treasure: 'treasure'
   }
-  
-  get template() {
-    return `modules/bx-factions/dist/templates/room-key-sheet-${this.isEditable ? "edit" : "view"}.hbs`;
-  }
+
+  templateBase = 'room-key';
 
   async getData(options={}) {
     const falsyIfEmptyP = (str) => str === "<p></p>" ? "" : str;
@@ -58,153 +51,54 @@ export default class FactionSheet extends JournalTextPageSheet {
     return context;
   }
 
-  async _onDragStart(event) {
-    const document = await fromUuid(event.target.closest(".faction-member[data-uuid]")?.dataset.uuid);
-    const dragData = document.toDragData();
-
-    if (!dragData) return;
-
-    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-  }
-
-  async _onDrop(event) {
-    const { type, uuid } = TextEditor.getDragEventData(event);
-
-    if (type === "Actor")
+  delegateDropAction(uuid, type, listType) {
+    if (listType === RoomKeySheet.ListTypes.inhabitant)
       this.#handleDroppedInhabitant(uuid);
-    if (type === "Item")
+    if (listType === RoomKeySheet.ListTypes.treasure)
       this.#handleDroppedTreasure(uuid);
-
-    return;
   }
 
   #handleDroppedInhabitant(uuid) {
-    let list = [...this.object.system.inhabitants];
-    const indexInList = list.findIndex((a) => a.uuid === uuid);
+    this.handleDropped(uuid, 'inhabitants', { shouldIncrement: true });
+  }
 
-    if (indexInList !== -1)
-      list[indexInList].number++;
-    else
-      list = [...list, {uuid, number: 1}];
+  #handleDroppedTreasure(uuid) {
+    this.handleDropped(uuid, 'treasure', { shouldIncrement: true });
+  }
 
-    this.object.update({
-      ['system.inhabitants']: list.filter(({uuid}) => !!uuid)
-    });
+  delegateDeleteAction(uuid, listType) {
+    if (listType === RoomKeySheet.ListTypes.inhabitant)
+      this.#handleRemoveInhabitant(uuid);
+    if (listType === RoomKeySheet.ListTypes.treasure)
+      this.#handleRemoveTreasure(uuid);
   }
 
   #handleRemoveInhabitant(targetUuid) {
-    const list = [...this.object.system.inhabitants]
-      .filter(({uuid}) => uuid !== targetUuid);
-
-    this.object.update({
-      ['system.inhabitants']: list
-    });
+    this.handleDelete(targetUuid, 'inhabitants', { hasIncrement: true });
+  }
+  #handleRemoveTreasure(targetUuid) {
+    this.handleDelete(targetUuid, 'treasure', { hasIncrement: true });
   }
 
   #handleUpdateInhabitantCount(e) {
     const value = e.target.value || 0;
     const uuid = e.target.closest("[data-uuid]")?.dataset.uuid;
-    const list = [...this.object.system.inhabitants];
-    const indexInList = list.findIndex(a => a.uuid === uuid);
-    list[indexInList].number = value;
-    this.object.update({
-      ['system.inhabitants']: list.filter(({uuid}) => !!uuid)
-    });
+    const listType = e.target.closest("[data-list-type]")?.dataset.listType;
+    let key;
+
+    if (listType === RoomKeySheet.ListTypes.inhabitant)
+      key = 'inhabitants';
+    if (listType === RoomKeySheet.ListTypes.treasure)
+      key = 'treasure';
+    if (!key)
+      return;
+
+    this.handleUpdateQuantity(uuid, key, value);
   }
 
-  #handleDroppedTreasure(uuid) {
-    let list = [...this.object.system.inhabitants];
-    const indexInList = list.findIndex((a) => a.uuid === uuid);
-
-    if (indexInList !== -1)
-      list[indexInList].number++;
-    else
-      list = [...list, {uuid, number: 1}];
-
-    this.object.update({
-      ['system.treasure']: list.filter(({uuid}) => !!uuid)
-    });
+  activateEditListeners(html) {
+    html.on("change", ".document-list__item__quantity", this.#handleUpdateInhabitantCount.bind(this));
   }
 
-  #handleRemoveTreasure(targetUuid) {
-    const list = [...this.object.system.inhabitants]
-      .filter(({uuid}) => uuid !== targetUuid);
-
-    this.object.update({
-      ['system.treasure']: list
-    });
-  }
-
-  #handleUpdateTreasureCount(e) {
-    const value = e.target.value || 0;
-    const uuid = e.target.closest("[data-uuid]")?.dataset.uuid;
-    const list = [...this.object.system.inhabitants];
-    const indexInList = list.findIndex(a => a.uuid === uuid);
-    list[indexInList].number = value;
-    this.object.update({
-      ['system.treasure']: list.filter(({uuid}) => !!uuid)
-    });
-  }
-
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    if (this.isEditable)
-      this.#activateEditListeners(html);
-    else
-      this.#activateViewListeners(html);  
-  }
-
-  #activateEditListeners(html) {
-    html.on("change", "[data-tab='inhabitants'] .faction-member__quantity", this.#handleUpdateInhabitantCount.bind(this));
-    html.on("change", "[data-tab='treasure'] .faction-member__quantity", this.#handleUpdateTreasureCount.bind(this));
-    this._contextMenu(html);
-  }
-
-  #activateViewListeners(html) {
-    
-  }
-
-  async #getContextOptions() {
-    // const getPage = li => this.object.pages.get(li.data("page-id"));
-
-    const getDocument = async (node) => await fromUuid(node.data("uuid"));
-    
-    return [{
-      name: "SIDEBAR.Edit",
-      icon: '<i class="fas fa-edit"></i>',
-      condition: async (li) => {
-        const doc = await getDocument(li);
-        return this.isEditable && doc?.canUserModify(game.user, "update")
-      },
-      callback: async (li) => {
-        const doc = await getDocument(li);
-        doc && doc.sheet.render(true);
-      }
-    }, {
-      name: "SIDEBAR.Delete",
-      icon: '<i class="fas fa-trash"></i>',
-      condition: async (li) => {
-        const doc = await getDocument(li);
-        return this.isEditable && doc?.canUserModify(game.user, "delete")
-      },
-      callback: async (li) => {
-        const {uuid} = await getDocument(li);
-
-        if (!uuid) return;
-
-        if (uuid.includes('Actor'))
-          this.#handleRemoveInhabitant(uuid);
-
-        if (uuid.includes('Item'))
-          this.#handleRemoveTreasure(uuid);
-      }
-    }];
-  }
-
-  async _contextMenu(html) {
-    ContextMenu.create(this, html, ".faction-member", await this.#getContextOptions());
-  }
-
-  
+  activateViewListeners(html) {}
 }

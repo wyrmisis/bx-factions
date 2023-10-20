@@ -1,0 +1,11 @@
+.bx-template--room-key {
+  &.bx-template--edit {
+    .control {
+      &--room-documents {
+        .document-list {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
+}
