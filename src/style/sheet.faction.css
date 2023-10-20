@@ -1,0 +1,72 @@
+.bx-template--faction {
+  &.bx-template--view {
+    .reputation {
+      &-tracker {
+        display: grid;
+        grid-template-columns: 1fr 5em 1fr;
+        gap: 1em;
+      }
+  
+      &-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        gap: .25em;
+        
+        meter {
+          width: 100%;
+        }
+  
+        label {
+          order: 1;
+          align-self: start;
+          font-weight: 600;
+        }
+  
+        &--infamy {
+          text-align: left;
+  
+          meter {
+            transform: rotate(180deg)
+          }
+        }
+  
+        &--reputation {
+          text-align: center;
+        }
+  
+        &--fame {
+          text-align: right;
+        }
+      }    
+    }
+  }
+
+  &.bx-template--edit {
+    .reputation-controls {
+      display: grid;
+      grid-template-columns: 4em 1fr 4em 4em 1fr 4em;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: 1em;
+  
+      span {
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+
+    .control {
+      &--faction-members {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+        margin-bottom: 1em;
+
+        .document-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}

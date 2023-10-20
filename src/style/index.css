@@ -1,4 +1,12 @@
-/* Shared */
-@import url('./shared.css');
-@import url('./view.css');
-@import url('./edit.css');
+/**
+ * Shared
+ */
+@import url('./shared/shared.css');
+@import url('./shared/view.css');
+@import url('./shared/edit.css');
+
+/**
+ * Templates
+ */
+@import url('./sheet.faction.css');
+@import url('./sheet.roomkey.css');

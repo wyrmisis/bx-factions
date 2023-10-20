@@ -1,0 +1,23 @@
+/*
+  READ VIEW
+*/
+.bx-template--view {
+  container-type: inline-size;
+  container-name: page;
+
+  & > article {
+    &:not(:last-of-type) {
+      margin-bottom: .5em;
+    }
+
+    &:has(main) {
+      &:has(aside) {
+        @container page (min-width: 600px) {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 2em;
+        }
+      }
+    }
+  }
+}

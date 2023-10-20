@@ -1,0 +1,31 @@
+{{#if (gt documentlist.length 0)}}
+  <ul class="document-list">
+    {{#each documentlist}}
+      {{#if (lookup this ../documentkey) }}
+        {{#with (lookup this ../documentkey)}}
+          <li class="document-list__item" data-uuid="{{uuid}}">
+            <div class="icon-wrapper">
+              <img src="{{img}}" alt="{{name}}" />
+              {{#if (gt ../number 1)}}
+                {{#unless ../../isCountEditable}}
+                  <span class="count">{{../number}}</span>
+                {{/unless}}
+              {{/if}}
+            </div>
+            <span>{{name}}</span>
+            {{#if ../../isCountEditable}}
+              {{numberInput ../number step=1 min=0 class="document-list__item__quantity"}}
+            {{/if}}
+          </li>
+        {{/with}}
+      {{else}}
+        <li class="document-list__item" data-uuid="{{uuid}}">
+          <div class="icon-wrapper">
+            <img src="{{img}}" alt="{{name}}" />
+          </div>
+          <span>{{name}}</span>
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+{{/if}}

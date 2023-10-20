@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol journal-page-editor--faction journal-page-editor--from-bx-factions" autocomplete="off">
+<form class="{{cssClass}} flexcol bx-template bx-template--faction bx-template--edit" autocomplete="off">
   {{> journalEntryPageHeader}}
 
 	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
@@ -27,12 +27,12 @@
 
 	{{!--
 		The Information tab contains less frequently updated
-		text-based info for the faction.
+		info for the faction.
 	--}}
 	<div class="tab" data-group="main" data-tab="information">
-		<img data-edit="system.img" src="{{document.system.img}}" class="faction-banner" />
+		<img data-edit="system.img" src="{{document.system.img}}" class="header-image" />
 
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.description"}}</h2>
 	    {{editor description
 				target="system.description"
@@ -44,7 +44,7 @@
 			}}
 		</div>
 
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.goals"}}</h2>
 	    {{editor goals
 				target="system.goals"
@@ -58,7 +58,7 @@
 	</div>
 
 	<div class="tab" data-group="main" data-tab="territory">
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.territory"}}</h2>
 			{{editor territory
 				target="system.territory"
@@ -70,7 +70,7 @@
 			}}
 		</div>
 
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.resources"}}</h2>
 			{{editor resources
 				target="system.resources"
@@ -89,7 +89,7 @@
 		other factions.
 	--}}
 	<div class="tab" data-group="main" data-tab="relationships">
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.alignment.label"}}</h2>
 			<select name="system.alignment" value="{{data.system.alignment}}">
 			{{#select data.system.alignment}}
@@ -100,7 +100,7 @@
 			</select>
 		</div>	
 		{{#if canDisplayReputation}}
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.reputation.label"}}</h2>
 			<div class="reputation-controls">
 				<label for="system.fame">{{localize "FACTIONS.templates.faction.reputation.fame"}}</label>
@@ -123,7 +123,7 @@
 		</div>
 		{{/if}}
 	
-		<div class="faction-relationships faction-control">
+		<div class="faction-relationships control">
 			<h2>{{localize "FACTIONS.templates.faction.relationships"}}</h2>
 	    {{editor relationships
 				target="system.relationships"
@@ -144,7 +144,7 @@
 		Normal members should have unlinked tokens.
 	--}}
 	<div class="tab" data-group="main" data-tab="membership">
-		<div class="faction-control">
+		<div class="control">
 			<h2>{{localize "FACTIONS.templates.faction.members.reinforcements"}}</h2>
 	    {{editor reinforcements
 				target="system.reinforcements"
@@ -156,35 +156,20 @@
 			}}
 		</div>
 
-		<div class="faction-member-lists faction-control">
-			<section class="faction-member-list" data-list-type="notables">
+		<div class="control control--faction-members">
+			<section data-list-type="notable">
 				<h2>{{localize "FACTIONS.templates.faction.members.notable"}}</h2>
 				{{#if notableActors}}
-					<ul class="faction-members faction-members--notable">
-						{{#each notableActors}}
-							<li class="faction-member faction-member--notable" data-uuid="{{uuid}}">
-								<img src="{{img}}" alt="{{name}}" />
-								<span>{{name}}</span>
-							</li>
-						{{/each}}
-					</ul>
+					{{> (partial 'document-list.hbs') documentlist=notableActors }}
 				{{else}}
 					<p class="empty">{{localize "FACTIONS.templates.faction.empty.notables.edit"}}</p>
 				{{/if}}
 			</section>
 
-			<section class="faction-member-list" data-list-type="members">
+			<section data-list-type="member">
 				<h2>{{localize "FACTIONS.templates.faction.members.others"}}</h2>
 				{{#if memberActors.length}}
-					<ul class="faction-members faction-members--others">
-						{{#each memberActors}}
-							<li class="faction-member faction-member--member" data-uuid="{{actor.uuid}}">
-								<img src="{{actor.img}}" alt="{{actor.name}}" />
-								<span>{{actor.name}}</span>
-								{{numberInput number step=1 min=0 class="faction-member__quantity"}}
-							</li>
-						{{/each}}
-					</ul>
+					{{> (partial 'document-list.hbs') documentlist=memberActors documentkey="actor" isCountEditable=true}}
 				{{else}}
 					<p class="empty">{{localize "FACTIONS.templates.faction.empty.members.edit"}}</p>
 				{{/if}}

@@ -7,6 +7,7 @@ import FactionSheet from "../sheets/faction-sheet.js";
 import RoomKeySheet from "../sheets/room-key-sheet.mjs";
 
 import { prepareSettings } from '../config/settings.mjs';
+import registerHandlebarsHelpers from "../config/handlebars.mjs";
 
 Hooks.once('init', async function() {
   Object.assign(CONFIG.JournalEntryPage.dataModels, {
@@ -25,4 +26,5 @@ Hooks.once('init', async function() {
 
 
   prepareSettings();
+  registerHandlebarsHelpers();
 });
