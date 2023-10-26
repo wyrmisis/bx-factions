@@ -164,7 +164,7 @@ export default class CharacterClassSheet extends BXTemplateBaseSheet {
   }
 
   async #rollGearTable(event) {
-    const { id, uuid } = event.target.closest('[data-uuid]')?.dataset?.id;
+    const { id, uuid } = event.target.closest('[data-uuid]')?.dataset;
     if (id === 'null' || !uuid) return;
     const table = await fromUuid(uuid);
     if (!table) return;
@@ -178,6 +178,10 @@ export default class CharacterClassSheet extends BXTemplateBaseSheet {
     await this.object.update({
       'system.gearTable': 0
     });
+  }
+
+  activateViewListeners(html) {
+    html.find('.gear-table .content-link').on('contextmenu', this.#rollGearTable.bind(this));
   }
 
   activateEditListeners(html) {
