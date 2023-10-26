@@ -11,19 +11,25 @@
 		<main>
 			{{{description}}}
 
-			<h2>Class Features</h2>
-			{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
+			<h2>{{localize "FACTIONS.templates.characterClass.edit.tabs.features"}}</h2>
+			{{#if document.system.featureItems.length}}
+				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
+			{{else}}
+				<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.features.view"}}</p>
+			{{/if}}
 		</main>
 		<aside>
 			<dl>
-				<dt>Prerequisites</dt>
+				{{#if document.system.hasPrerequisites}}
+				<dt>{{localize "FACTIONS.templates.characterClass.prerequisites"}}</dt>
 				<dd>
 					{{#each document.system.prerequisitesFormatted}}
 						<span>{{this}} {{localize (concat "OSE.scores." @key '.short')}}{{#unless @last}},{{/unless}}</span>
 					{{/each}}
 				</dd>
+				{{/if}}
 
-				<dt>Prime Requisites</dt>	
+				<dt>{{localize "FACTIONS.templates.characterClass.primerequisites.label"}}</dt>	
 				<dd>
 					<table>
 						<tr>
@@ -32,9 +38,9 @@
 								{{#each document.system.halfRequisitesFormatted}}
 									{{#if @last}}
 										{{#if @root.document.system.primerequisites.halfIsAnd}}
-											and
+											{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
 										{{else}}
-											or
+											{{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
 										{{/if}}
 									{{/if}}
 
@@ -44,6 +50,8 @@
 										,
 										{{/if}}
 									{{/unless}}
+								{{else}}
+									<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.primerequisite"}}</p>
 								{{/each}}
 							</td>
 						</tr>
@@ -53,9 +61,9 @@
 								{{#each document.system.fullRequisitesFormatted}}
 									{{#if @last}}
 										{{#if @root.document.system.primerequisites.fullIsAnd}}
-											and
+											{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
 										{{else}}
-											or
+											={{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
 										{{/if}}
 									{{/if}}
 									
@@ -66,22 +74,31 @@
 										,
 										{{/if}}
 									{{/unless}}
+								{{else}}
+									<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.primerequisite"}}</p>
 								{{/each}}
 							</td>
 						</tr>
 					</table>
 				</dd>
-				<dt>Hit Die</dt> <dd>d{{document.system.hitDieSize}}</dd>
-				<dt>Maximum Level</dt> <dd>{{document.system.maxLevel}}</dd>
-				<dt>Armour</dt> <dd>{{document.system.armor}}</dd>
-				<dt>Weapons</dt> <dd>{{document.system.weapons}}</dd>
-				<dt>Languages</dt> <dd>{{document.system.languages}}</dd>
+				<dt>{{localize "FACTIONS.templates.characterClass.hitDieSize"}}</dt> <dd>d{{document.system.hitDieSize}}</dd>
+				<dt>{{localize "FACTIONS.templates.characterClass.maxLevel"}}</dt> <dd>{{document.system.maxLevel}}</dd>
+				<dt>{{localize "FACTIONS.templates.characterClass.armor"}}</dt> <dd>{{#if document.system.armor}}{{document.system.armor}}{{else}}{{localize "FACTIONS.templates.characterClass.empty.armor"}}{{/if}}</dd>
+				<dt>{{localize "FACTIONS.templates.characterClass.weapons"}}</dt> <dd>{{#if document.system.weapons}}{{document.system.weapons}}{{else}}{{localize "FACTIONS.templates.characterClass.empty.weapons"}}{{/if}}</dd>
+				<dt>{{localize "FACTIONS.templates.characterClass.languages"}}</dt> <dd>{{#if document.system.languages}}{{document.system.languages}}{{else}}{{localize "FACTIONS.templates.characterClass.empty.languages"}}{{/if}}</dd>
+				{{#if restrictions}}
+				<dt>{{localize "FACTIONS.templates.characterClass.restrictions"}}</dt> <dd>{{{restrictions}}}</dd>
+				{{/if}}
+				{{#if gearTable}}
+				<dt>{{localize "FACTIONS.templates.characterClass.gearTable"}}</dt> <dd class="gear-table">{{{gearTable}}}</dd>
+				{{/if}}
 			</dl>
 		</aside>
 	</article>
 
+	{{#if data.system.xp}}
 	<article>
-		<h2>Advancement</h2>
+		<h2>{{localize "FACTIONS.templates.characterClass.edit.tabs.xp"}}</h2>
 		<table class="xp-table">
 			<colgroup>
 				<col span="4" />
@@ -94,11 +111,11 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th rowspan="2">Level</th>
-					<th rowspan="2">XP</th>
-					<th rowspan="2">HD</th>
-					<th rowspan="2">THAC0</th>
-					<th colspan="5">Saves</th>
+					<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.level"}}</th>
+					<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.xp"}}</th>
+					<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.hd"}}</th>
+					<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.thac0"}}</th>
+					<th colspan="5">{{localize "FACTIONS.templates.characterClass.advancement.saves"}}</th>
 					{{#each document.system.leveledResources}}
 						{{#if pool.length}}
 							<th colspan="{{pool.length}}">{{label}}</th>
@@ -106,11 +123,11 @@
 					{{/each}}
         </tr>
         <tr>
-					<th>D</th>
-					<th>W</th>
-					<th>P</th>
-					<th>B</th>
-					<th>S</th>
+					<th data-tooltip="{{localize "OSE.saves.death.long"}}">D</th>
+					<th data-tooltip="{{localize "OSE.saves.wand.long"}}">W</th>
+					<th data-tooltip="{{localize "OSE.saves.paralysis.long"}}">P</th>
+					<th data-tooltip="{{localize "OSE.saves.breath.long"}}">B</th>
+					<th data-tooltip="{{localize "OSE.saves.spell.long"}}">S</th>
 					{{#each document.system.leveledResources}}
 						{{#each pool}}
 						<th>{{label}}</th>
@@ -126,11 +143,11 @@
 					<td>{{levelObj.value}}</td>
 					<td>{{levelObj.hd.count}}d{{../document.system.hitDieSize}}{{#if levelObj.hd.modifier}}+{{levelObj.hd.modifier}}{{/if}}{{#unless levelObj.hd.canUseConMod}}*{{/unless}}</td>
 					<td>{{levelObj.thac0}} (+{{levelObj.attackBonus}})</td>
-					<td>{{levelObj.saves.death}}</td>
-					<td>{{levelObj.saves.wands}}</td>
-					<td>{{levelObj.saves.paralysis}}</td>
-					<td>{{levelObj.saves.breath}}</td>
-					<td>{{levelObj.saves.spell}}</td>
+					<td data-tooltip="{{localize "OSE.saves.death.long"}}">{{levelObj.saves.death}}</td>
+					<td data-tooltip="{{localize "OSE.saves.wand.long"}}">{{levelObj.saves.wands}}</td>
+					<td data-tooltip="{{localize "OSE.saves.paralysis.long"}}">{{levelObj.saves.paralysis}}</td>
+					<td data-tooltip="{{localize "OSE.saves.breath.long"}}">{{levelObj.saves.breath}}</td>
+					<td data-tooltip="{{localize "OSE.saves.spell.long"}}">{{levelObj.saves.spell}}</td>
 					{{#each ../document.system.leveledResources}}
 						{{#each pool}}
 							{{#with (lookup perLevel index) as |value|}}
@@ -142,25 +159,26 @@
 				{{else}}
 					<tr>
 						<td colspan="9">
-							<p class="empty">No levels added</p>
+							<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.advancement"}}</p>
 						</td>
 					</tr>
 				{{/each}}
 			</tbody>
 			<caption>
-				<p><em>*</em>: Modifiers from CON no longer apply</p>
-				<p><em>D</em>: Death/poison; <em>W</em>: Wands; <em>P</em>: Paralysis/petrify; <em>B</em>: Breath attacks; <em>S</em>: Spells/rods/staves.</p>
+				<p><em>*</em>: {{localize "FACTIONS.templates.characterClass.advancement.caption.conMod"}}</p>
+				<p></p>
 			</caption>
 		</table>
 	</article>
+	{{/if}}
 
 	{{#if document.system.hasSpells}}
 	<article>
-		<h2>Spell List</h2>
+		<h2>{{localize "FACTIONS.templates.characterClass.edit.tabs.spellList"}}</h2>
 
 		{{#each spells}}
 			<div class="control control--spell-list spell-list" data-list-type="spells">
-				<h3>Level {{add @index 1}}</h3>
+				<h3>{{localize "FACTIONS.templates.characterClass.spellLevel" level=(add @index 1)}}</h3>
 				{{> (partial 'document-list.hbs') documentlist=this }}
 			</div>
 		{{/each}}

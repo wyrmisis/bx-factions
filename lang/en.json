@@ -2,6 +2,7 @@
   "TYPES.JournalEntryPage.bx-factions": {
     "faction": "Faction",
     "roomKey": "Dungeon Room Key",
+    "characterClass": "Character Class (OSE)",
     "levelOverview": "Dungeon Level Overview"
   },
 
@@ -73,6 +74,7 @@
           }
         }       
       },
+
       "roomKey": {
         "sheetName": "Room Key Sheet",
 
@@ -107,8 +109,92 @@
           }
         }
       },
+
       "levelOverview": {
         "sheetName": "Dungeon Level Overview Sheet"
+      },
+
+      "characterClass": {
+        "sheetName": "Character Class Sheet",
+
+        "hitDieSize": "Hit Die",
+        "maxLevel": "Maximum Level",
+        "armor": "Armour",
+        "weapons": "Weapons",
+        "languages": "Languages",
+        "restrictions": "Restrictions",
+        "gearTable": "Gear Table",
+        "prerequisites": "Prerequisites",
+        "primerequisites": {
+          "label": "Prime requisites",
+          "half": "Prime requisites (5%)",
+          "full": "Prime requisites (10%)",
+          "inclusive": "and",
+          "exclusive": "or"
+        },
+        "spellLevel": "Level {level}",
+
+        "advancement": {
+          "level": "Lv.",
+          "xp": "XP",
+          "hd": "HD",
+          "thac0": "THAC0",
+          "saves": "Saves",
+          "caption": {
+            "conMod": "Modifiers from CON no longer apply"
+          },
+          "conMod": "Con Mod?",
+
+          "add": "Add Level",
+          "remove": "Remove Last Level"
+        },
+
+        "resources": {
+          "category": {
+            "label": "Category",
+            "add": "Add Resource Category", 
+            "remove": "Remove Resource Category" 
+          },
+          "pool": {
+            "label": "Resource",
+            "add": "Add Resource",
+            "remove": "Remove Resource"
+          }
+        },
+        
+        "edit": {
+          "tabs": {
+            "description": "Description",
+            "information": "Class Details",
+            "xp": "Advancement",
+            "resources": "Resources",
+            "spellList": "Spell List",
+            "features": "Class Features"
+          }
+        },
+
+        "empty": {
+          "gearTable": "Unassigned",
+          "secrets": "This room has no secrets",
+          "traps": "This room has no traps",
+          "advancement": "No levels added",
+          "armor": "None",
+          "weapons": "None",
+          "languages": "None",
+          "spellList": {
+            "all": "This class has no spells. Drag abilities to add them to this class",
+            "atLevel": "This class has no spells of this level"
+          },
+          "features": {
+            "view": "This class has no features",
+            "edit": "This class has no features. Drag abilities to add them to this class"
+          },
+          "resources": {
+            "category": "No resource categories have been added",
+            "pool": "No resources in this category"
+          },
+          "primerequisite": "None"
+        }
       }
     }
   }

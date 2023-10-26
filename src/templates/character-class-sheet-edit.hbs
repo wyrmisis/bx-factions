@@ -29,9 +29,7 @@
 	--}}
 	<div class="tab" data-group="main" data-tab="information">
 		<div class="control control--details">
-			<h2 class="details-grid__heading">Class Details</h2>
-			
-			<label class="details-grid__label">Hit Die Size</label>
+			<label class="details-grid__label">{{localize "FACTIONS.templates.characterClass.hitDieSize"}}</label>
 			<select class="details-grid__field" data-dtype="Number" name="system.hitDieSize" value="{{document.system.hitDieSize}}">
 				{{#select document.system.hitDieSize}}
 					{{#each hitDieOptions}}
@@ -40,13 +38,13 @@
 				{{/select}}
 			</select>
 
-			<label class="details-grid__label">Gear Table</label>
+			<label class="details-grid__label">{{localize "FACTIONS.templates.characterClass.gearTable"}}</label>
 			<div class="details-grid__field details-grid__field--gear-table">
 				{{#if gearTable}}
 					{{{gearTable}}}
 					<button type="button" class="delete-button remove-gear-table" data-tooltip="Remove gear table" aria-label="Remove gear table"><i class="fas fa-x"></i></button>
 				{{else}}
-					<p class="empty">Unassigned</p>
+					<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.gearTable"}}</p>
 				{{/if}}
 			</div>
 
@@ -120,12 +118,12 @@
 			<table class="xp-table">
 				<thead>
 					<tr>
-						<th rowspan="2">Level</th>
-						<th rowspan="2">XP</th>
-						<th rowspan="2">HD</th>
-						<th rowspan="2">THAC0</th>
-						<th rowspan="2">Con Mod?</th>
-						<th colspan="5">Saves</th>
+						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.level"}}</th>
+						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.xp"}}</th>
+						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.hd"}}</th>
+						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.thac0"}}</th>
+						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.conMod"}}</th>
+						<th colspan="5">{{localize "FACTIONS.templates.characterClass.advancement.saves"}}</th>
 					</tr>
 					<tr>
 						<th>D</th>
@@ -146,7 +144,7 @@
 						<td>
 							<span class="flexrow">
 								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.hd.count" value="{{levelObj.hd.count}}" />
-								d4+
+								d{{@root.document.system.hitDieSize}}+
 								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.hd.modifier" value="{{levelObj.hd.modifier}}" />
 							</span>
 						</td>
@@ -180,7 +178,7 @@
 					{{else}}
 						<tr>
 							<td colspan="10">
-								<p class="empty">No levels added</p>
+								<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.advamcement"}}</p>
 							</td>
 						</tr>
 					{{/each}}
@@ -189,8 +187,8 @@
 		</div>
 
 		<div class="control control--xp-buttons flexrow">
-			<button type="button" class="add-level"><i class="fas fa-plus"></i> Add Level</button>
-			<button type="button" class="remove-level"><i class="fas fa-minus"></i> Remove Last Level</button>
+			<button type="button" class="add-level"><i class="fas fa-plus"></i> {{localize "FACTIONS.templates.characterClass.advancement.add"}}</button>
+			<button type="button" class="remove-level"><i class="fas fa-minus"></i> {{localize "FACTIONS.templates.characterClass.advancement.remove"}}</button>
 		</div>
 	</div>
 
@@ -200,16 +198,16 @@
 		{{#each document.system.leveledResources as |resourceItem resourceIndex|}}
 			<div class="resource-category" data-category-id="{{@index}}">
 				<header>
-					<label>Category</label>
+					<label>{{localize "FACTIONS.templates.characterClass.resources.category.label"}}</label>
 					<input type="text" data-dtype="String" name="system.leveledResources.{{resourceIndex}}.label" value="{{resourceItem.label}}" />		
-					<button type="button" class="delete-button delete-resource" aria-label="Delete Resource"><i class="fas fa-x"></i></button>
+					<button type="button" class="delete-button delete-resource" aria-label="{{localize "FACTIONS.templates.characterClass.resources.category.remove"}}"><i class="fas fa-x"></i></button>
 				</header>
 				{{#if pool}}
 					<div class="resource-table">
 						<table class="resource-pools">
 							<thead>
 								<tr>
-									<th>Pool Name</th>
+									<th>{{localize "FACTIONS.templates.characterClass.resources.pool.label"}}</th>
 									{{#each (repeat @root.document.system.maxLevel)}}
 										<th>{{add @index 1}}</th>
 									{{/each}}
@@ -235,7 +233,7 @@
 										</td>
 									{{/each}}
 									<td class="controls">
-										<button type="button" class="delete-button delete-resource-pool" aria-label+"Delete Pool"><i class="fas fa-x"></i></button>
+										<button type="button" class="delete-button delete-resource-pool" aria-label+"{{localize "FACTIONS.templates.characterClass.resources.pool.remove"}}"><i class="fas fa-x"></i></button>
 									</td>
 								</tr>
 								{{/each}}
@@ -243,15 +241,15 @@
 						</table>
 					</div>
 				{{else}}
-					<p class="empty">No resources in this category.</p>
+					<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.resources.pool"}}</p>
 				{{/if}}
-				<button type="button" class="add-resource-pool">Add Resource Pool</button>
+				<button type="button" class="add-resource-pool">{{localize "FACTIONS.templates.characterClass.resources.pool.add"}}</button>
 			</div>
 		{{else}}
-			<p class="empty">No resource categories available.</p>
+			<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.resources.category"}}</p>
 		{{/each}}
 
-		<button type="button" class="add-resource">Add Resource Category</button>
+		<button type="button" class="add-resource">{{localize "FACTIONS.templates.characterClass.resources.category.add"}}</button>
 	</div>
 
 	{{!--
@@ -261,11 +259,15 @@
 			{{#each spells}}
 			<div class="control control--spell-list spell-list" data-list-type="spells">
 				<h2>Level {{add @index 1}}</h2>
-				{{> (partial 'document-list.hbs') documentlist=this }}
+				{{#if this.length}}
+					{{> (partial 'document-list.hbs') documentlist=this }}
+				{{else}}
+				<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.spellList.atLevel"}}</p>
+				{{/if}}
 			</div>
 			{{/each}}
 		{{else}}
-			<p class="empty">This class has no spells</p>
+			<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.spellList.all"}}</p>
 		{{/if}}
 
 	</div>
@@ -278,7 +280,7 @@
 				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
 			</div>
 		{{else}}
-			<p class="empty">This class has no features</p>
+			<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.features.edit"}}</p>
 		{{/if}}
 	</div>
 
