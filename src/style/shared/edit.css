@@ -2,6 +2,7 @@
   EDIT VIEW
 */
 .bx-template--edit {
+  overflow: hidden;
   .sheet-tabs {
     flex: 0;
   }
@@ -10,6 +11,8 @@
     margin: 0 1rem 1rem;
     flex-direction: column;
     gap: 1em;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &[data-tab].active {
       display: flex;

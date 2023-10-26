@@ -70,6 +70,8 @@ export default class FactionSheet extends BXTemplateBaseSheet {
   }
 
   delegateDropAction(uuid, type, listType) {
+    if (!this.isEditable) return;
+
     if (listType === FactionSheet.ListTypes.notable)
       this.#handleDroppedNotableMember(uuid);
     if (listType === FactionSheet.ListTypes.member)

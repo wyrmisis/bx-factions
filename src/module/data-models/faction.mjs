@@ -29,10 +29,12 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
 
       members: new fields.SchemaField({
         notables: new fields.ArrayField(
+          /** @todo once core supports storing UUIDs, replace with that data type */
           new fields.StringField({required: false, blank: false})
         ),
         members: new fields.ArrayField(
           new fields.SchemaField({
+            /** @todo once core supports storing UUIDs, replace with that data type */
             uuid: new fields.StringField({required: false, blank: false}),
             number: new fields.NumberField({min: 0, integer: true})
           })

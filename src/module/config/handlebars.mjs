@@ -1,11 +1,15 @@
-const registerHandlebarsHelpers = async () => {
-  const templatePath = 'modules/bx-factions/dist/templates';
-  const partialPath = `${templatePath}/partials`;
+import { partialPath } from "./constants.mjs";
 
+const registerHandlebarsHelpers = async () => {
   Handlebars.registerHelper(
     'partial', 
     (path) => `${partialPath}/${path}`
   )
+
+  Handlebars.registerHelper(
+    'repeat',
+    (length) => new Array(length).fill(null)
+  );
 
   // Handlebars.registerPartial()
 

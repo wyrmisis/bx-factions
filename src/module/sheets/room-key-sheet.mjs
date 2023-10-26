@@ -52,6 +52,7 @@ export default class RoomKeySheet extends BXTemplateBaseSheet {
   }
 
   delegateDropAction(uuid, type, listType) {
+    if (!this.isEditable) return;
     if (listType === RoomKeySheet.ListTypes.inhabitant)
       this.#handleDroppedInhabitant(uuid);
     if (listType === RoomKeySheet.ListTypes.treasure)

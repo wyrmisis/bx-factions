@@ -1,3 +1,5 @@
+import { templatePath } from "../config/constants.mjs";
+
 export default class BXTemplateBaseSheet extends JournalTextPageSheet {
   /**
    * Effectively the template file's unique identifier. If you make a template, it should include the following:
@@ -28,7 +30,7 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
   }
   
   get template() {
-    return `modules/bx-factions/dist/templates/${this.templateBase}-sheet-${this.isEditable ? "edit" : "view"}.hbs`;
+    return `${templatePath}/${this.templateBase}-sheet-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   async _onDragStart(event) {    

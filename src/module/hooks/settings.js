@@ -1,4 +1,4 @@
-export const prepareSettings = () => {
+Hooks.once('init', async function() {
   game.settings.register(game.modules.get('bx-factions').id, "useFactionRepModifiers", {
     name: game.i18n.localize("FACTIONS.settings.useFactionRepModifiers.label"),
     hint: game.i18n.localize("FACTIONS.settings.useFactionRepModifiers.hint"),
@@ -7,4 +7,4 @@ export const prepareSettings = () => {
     type: Boolean,
     config: true,
   });
-}
+});
