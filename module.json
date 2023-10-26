@@ -44,6 +44,12 @@
         "filePathFields": {
           "img": ["IMAGE"]
         }
+      },
+      "characterClass": {
+        "htmlFields": ["description"],
+        "filePathFields": {
+          "img": ["IMAGE"]
+        }
       }
     }
   }

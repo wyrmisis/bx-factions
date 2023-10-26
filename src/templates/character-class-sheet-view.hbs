@@ -1,0 +1,170 @@
+{{#if data.title.show}}
+<header class="journal-page-header">
+    <h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
+		{{#if document.system.img}}
+			<img src="{{document.system.img}}" />
+		{{/if}}
+</header>
+{{/if}}
+<section class="journal-page-content bx-template bx-template--character-class bx-template--view">
+	<article class='class-details'>
+		<main>
+			{{{description}}}
+
+			<h2>Class Features</h2>
+			{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
+		</main>
+		<aside>
+			<dl>
+				<dt>Prerequisites</dt>
+				<dd>
+					{{#each document.system.prerequisitesFormatted}}
+						<span>{{this}} {{localize (concat "OSE.scores." @key '.short')}}{{#unless @last}},{{/unless}}</span>
+					{{/each}}
+				</dd>
+
+				<dt>Prime Requisites</dt>	
+				<dd>
+					<table>
+						<tr>
+							<th>5%</th>
+							<td>
+								{{#each document.system.halfRequisitesFormatted}}
+									{{#if @last}}
+										{{#if @root.document.system.primerequisites.halfIsAnd}}
+											and
+										{{else}}
+											or
+										{{/if}}
+									{{/if}}
+
+									{{this}} {{localize (concat "OSE.scores." @key '.short')}}
+									{{#unless @last}}
+										{{#if (gt ../document.system.halfRequisitesCount 2)}}
+										,
+										{{/if}}
+									{{/unless}}
+								{{/each}}
+							</td>
+						</tr>
+						<tr>
+							<th>10%</th>
+							<td>
+								{{#each document.system.fullRequisitesFormatted}}
+									{{#if @last}}
+										{{#if @root.document.system.primerequisites.fullIsAnd}}
+											and
+										{{else}}
+											or
+										{{/if}}
+									{{/if}}
+									
+									{{this}} {{localize (concat "OSE.scores." @key '.short')}}
+
+									{{#unless @last}}
+										{{#if (gt ../document.system.fullRequisitesCount 2)}}
+										,
+										{{/if}}
+									{{/unless}}
+								{{/each}}
+							</td>
+						</tr>
+					</table>
+				</dd>
+				<dt>Hit Die</dt> <dd>d{{document.system.hitDieSize}}</dd>
+				<dt>Maximum Level</dt> <dd>{{document.system.maxLevel}}</dd>
+				<dt>Armour</dt> <dd>{{document.system.armor}}</dd>
+				<dt>Weapons</dt> <dd>{{document.system.weapons}}</dd>
+				<dt>Languages</dt> <dd>{{document.system.languages}}</dd>
+			</dl>
+		</aside>
+	</article>
+
+	<article>
+		<h2>Advancement</h2>
+		<table class="xp-table">
+			<colgroup>
+				<col span="4" />
+				<col span="5" class="saves" />
+				{{#each document.system.leveledResources}}
+					{{#if pool.length}}
+						<col span="{{pool.length}}" class="resource-{{@index}}" />
+					{{/if}}
+				{{/each}}
+			</colgroup>
+			<thead>
+				<tr>
+					<th rowspan="2">Level</th>
+					<th rowspan="2">XP</th>
+					<th rowspan="2">HD</th>
+					<th rowspan="2">THAC0</th>
+					<th colspan="5">Saves</th>
+					{{#each document.system.leveledResources}}
+						{{#if pool.length}}
+							<th colspan="{{pool.length}}">{{label}}</th>
+						{{/if}}
+					{{/each}}
+        </tr>
+        <tr>
+					<th>D</th>
+					<th>W</th>
+					<th>P</th>
+					<th>B</th>
+					<th>S</th>
+					{{#each document.system.leveledResources}}
+						{{#each pool}}
+						<th>{{label}}</th>
+						{{/each}}
+					{{/each}}
+        </tr>
+    	</thead>
+
+			<tbody>
+				{{#each data.system.xp as |levelObj index|}}
+				<tr>
+					<td>{{add index 1}}</td>
+					<td>{{levelObj.value}}</td>
+					<td>{{levelObj.hd.count}}d{{../document.system.hitDieSize}}{{#if levelObj.hd.modifier}}+{{levelObj.hd.modifier}}{{/if}}{{#unless levelObj.hd.canUseConMod}}*{{/unless}}</td>
+					<td>{{levelObj.thac0}} (+{{levelObj.attackBonus}})</td>
+					<td>{{levelObj.saves.death}}</td>
+					<td>{{levelObj.saves.wands}}</td>
+					<td>{{levelObj.saves.paralysis}}</td>
+					<td>{{levelObj.saves.breath}}</td>
+					<td>{{levelObj.saves.spell}}</td>
+					{{#each ../document.system.leveledResources}}
+						{{#each pool}}
+							{{#with (lookup perLevel index) as |value|}}
+							<td>{{#if value}}{{value}}{{else}}&ndash;{{/if}}</td>
+							{{/with}}
+						{{/each}}
+					{{/each}}
+				</tr>
+				{{else}}
+					<tr>
+						<td colspan="9">
+							<p class="empty">No levels added</p>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+			<caption>
+				<p><em>*</em>: Modifiers from CON no longer apply</p>
+				<p><em>D</em>: Death/poison; <em>W</em>: Wands; <em>P</em>: Paralysis/petrify; <em>B</em>: Breath attacks; <em>S</em>: Spells/rods/staves.</p>
+			</caption>
+		</table>
+	</article>
+
+	{{#if document.system.hasSpells}}
+	<article>
+		<h2>Spell List</h2>
+
+		{{#each spells}}
+			<div class="control control--spell-list spell-list" data-list-type="spells">
+				<h3>Level {{add @index 1}}</h3>
+				{{> (partial 'document-list.hbs') documentlist=this }}
+			</div>
+		{{/each}}
+	</article>
+	{{/if}}
+
+</section>

@@ -1,0 +1,285 @@
+<form class="{{cssClass}} flexcol bx-template bx-template--character-class bx-template--edit" autocomplete="off">
+  {{> journalEntryPageHeader}}
+
+	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
+		<a class="item" data-tab="description">{{localize "FACTIONS.templates.characterClass.edit.tabs.description"}}</a>
+		<a class="item" data-tab="information">{{localize "FACTIONS.templates.characterClass.edit.tabs.information"}}</a>
+		<a class="item" data-tab="xp">{{localize "FACTIONS.templates.characterClass.edit.tabs.xp"}}</a>
+		<a class="item" data-tab="resources">{{localize "FACTIONS.templates.characterClass.edit.tabs.resources"}}</a>
+		<a class="item" data-tab="spellList">{{localize "FACTIONS.templates.characterClass.edit.tabs.spellList"}}</a>
+		<a class="item" data-tab="features">{{localize "FACTIONS.templates.characterClass.edit.tabs.features"}}</a>
+	</nav>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="description">
+		<img data-edit="system.img" src="{{document.system.img}}" class="header-image" />
+
+    {{editor description
+			target="system.description"
+			class="journal-page-content"
+			button=false
+			editable=true
+    	engine=editor.engine
+			collaborate=editor.collaborate
+		}}
+	</div>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="information">
+		<div class="control control--details">
+			<h2 class="details-grid__heading">Class Details</h2>
+			
+			<label class="details-grid__label">Hit Die Size</label>
+			<select class="details-grid__field" data-dtype="Number" name="system.hitDieSize" value="{{document.system.hitDieSize}}">
+				{{#select document.system.hitDieSize}}
+					{{#each hitDieOptions}}
+						<option value="{{this}}">d{{this}}</option>
+					{{/each}}
+				{{/select}}
+			</select>
+
+			<label class="details-grid__label">Gear Table</label>
+			<div class="details-grid__field details-grid__field--gear-table">
+				{{#if gearTable}}
+					{{{gearTable}}}
+					<button type="button" class="delete-button remove-gear-table" data-tooltip="Remove gear table" aria-label="Remove gear table"><i class="fas fa-x"></i></button>
+				{{else}}
+					<p class="empty">Unassigned</p>
+				{{/if}}
+			</div>
+
+			<label class="details-grid__label">Weapons</label>
+			<input class="details-grid__field" type="text" data-dtype="String" name="system.weapons" value="{{document.system.weapons}}" />
+
+			<label class="details-grid__label">Armor</label>
+			<input class="details-grid__field" type="text" data-dtype="String" name="system.armor" value="{{document.system.armor}}" />
+
+			<label class="details-grid__label">Languages</label>
+			<input class="details-grid__field details-grid__field--languages" type="text" data-dtype="String" name="system.languages" value="{{document.system.languages}}" />
+		</div>
+
+		<div class="control control--requisite-grid">
+			<!-- First row -->
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.str.short"}}</span>
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.int.short"}}</span>
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.wis.short"}}</span>
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.dex.short"}}</span>
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.con.short"}}</span>
+			<span class="requisite-grid__stat-label">{{localize "OSE.scores.cha.short"}}</span>
+			<span class="requisite-grid__stat-label">Inclusive</span>
+
+			<!-- Second row -->
+			<span class="requisite-grid__heading">{{localize "FACTIONS.templates.characterClass.prerequisites"}}</span>
+			<input type="text" data-dtype="Number" name="system.prerequisites.str" value="{{document.system.prerequisites.str}}" />
+			<input type="text" data-dtype="Number" name="system.prerequisites.int" value="{{document.system.prerequisites.int}}" />
+			<input type="text" data-dtype="Number" name="system.prerequisites.wis" value="{{document.system.prerequisites.wis}}" />
+			<input type="text" data-dtype="Number" name="system.prerequisites.dex" value="{{document.system.prerequisites.dex}}" />
+			<input type="text" data-dtype="Number" name="system.prerequisites.con" value="{{document.system.prerequisites.con}}" />
+			<input type="text" data-dtype="Number" name="system.prerequisites.cha" value="{{document.system.prerequisites.cha}}" />
+
+			<!-- Third row -->
+			<span class="requisite-grid__heading">{{localize "FACTIONS.templates.characterClass.primerequisites.half"}}</span>
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.str" value="{{document.system.primerequisites.half.str}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.int" value="{{document.system.primerequisites.half.int}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.wis" value="{{document.system.primerequisites.half.wis}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.dex" value="{{document.system.primerequisites.half.dex}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.con" value="{{document.system.primerequisites.half.con}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.half.cha" value="{{document.system.primerequisites.half.cha}}" />
+			<input type="checkbox" name="system.primerequisites.halfIsAnd" data-tooltip="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" data-label="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" {{checked document.system.primerequisites.halfIsAnd}} />
+
+			<!-- Fourth row -->
+			<span class="requisite-grid__heading">{{localize "FACTIONS.templates.characterClass.primerequisites.full"}}</span>
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.str" value="{{document.system.primerequisites.full.str}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.int" value="{{document.system.primerequisites.full.int}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.wis" value="{{document.system.primerequisites.full.wis}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.dex" value="{{document.system.primerequisites.full.dex}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.con" value="{{document.system.primerequisites.full.con}}" />
+			<input type="text" data-dtype="Number" name="system.primerequisites.full.cha" value="{{document.system.primerequisites.full.cha}}" />
+			<input type="checkbox" name="system.primerequisites.fullIsAnd" data-tooltip="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" data-label="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" {{checked document.system.primerequisites.fullIsAnd}} />
+		</div>
+
+		<div class="control">
+			<h2>{{localize "FACTIONS.templates.characterClass.restrictions"}}</h2>
+			{{editor restrictions
+				target="system.restrictions"
+				class="journal-page-content"
+				button=false
+				editable=true
+				engine=editor.engine
+				collaborate=editor.collaborate
+			}}
+		</div>
+	</div>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="xp">
+		<div class="control control--xp-table">
+			<table class="xp-table">
+				<thead>
+					<tr>
+						<th rowspan="2">Level</th>
+						<th rowspan="2">XP</th>
+						<th rowspan="2">HD</th>
+						<th rowspan="2">THAC0</th>
+						<th rowspan="2">Con Mod?</th>
+						<th colspan="5">Saves</th>
+					</tr>
+					<tr>
+						<th>D</th>
+						<th>W</th>
+						<th>P</th>
+						<th>B</th>
+						<th>S</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{{#each data.system.xp as |levelObj index|}}
+					<tr>
+						<td>{{add index 1}}</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--xp" name="system.xp.{{index}}.value" value="{{levelObj.value}}" />
+						</td>
+						<td>
+							<span class="flexrow">
+								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.hd.count" value="{{levelObj.hd.count}}" />
+								d4+
+								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.hd.modifier" value="{{levelObj.hd.modifier}}" />
+							</span>
+						</td>
+						<td>
+							<span class="flexrow">
+								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.thac0" value="{{levelObj.thac0}}" />
+								(+
+								<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.attackBonus" value="{{levelObj.attackBonus}}" />
+								)
+							</span>
+						</td>
+						<td>
+							<input type="checkbox" name="system.xp.{{index}}.hd.canUseConMod" data-tooltip="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" data-label="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" {{checked levelObj.hd.canUseConMod}} />
+						</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.death" value="{{levelObj.saves.death}}" />
+						</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.wands" value="{{levelObj.saves.wands}}" />
+						</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.paralysis" value="{{levelObj.saves.paralysis}}" />
+						</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.breath" value="{{levelObj.saves.breath}}" />
+						</td>
+						<td>
+							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.spell" value="{{levelObj.saves.spell}}" />
+						</td>
+					</tr>
+					{{else}}
+						<tr>
+							<td colspan="10">
+								<p class="empty">No levels added</p>
+							</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="control control--xp-buttons flexrow">
+			<button type="button" class="add-level"><i class="fas fa-plus"></i> Add Level</button>
+			<button type="button" class="remove-level"><i class="fas fa-minus"></i> Remove Last Level</button>
+		</div>
+	</div>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="resources">
+		{{#each document.system.leveledResources as |resourceItem resourceIndex|}}
+			<div class="resource-category" data-category-id="{{@index}}">
+				<header>
+					<label>Category</label>
+					<input type="text" data-dtype="String" name="system.leveledResources.{{resourceIndex}}.label" value="{{resourceItem.label}}" />		
+					<button type="button" class="delete-button delete-resource" aria-label="Delete Resource"><i class="fas fa-x"></i></button>
+				</header>
+				{{#if pool}}
+					<div class="resource-table">
+						<table class="resource-pools">
+							<thead>
+								<tr>
+									<th>Pool Name</th>
+									{{#each (repeat @root.document.system.maxLevel)}}
+										<th>{{add @index 1}}</th>
+									{{/each}}
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each pool as |poolItem poolIndex|}}
+								<tr data-pool-id="{{poolIndex}}">
+									<th>
+										<input
+											type="text"
+											name="system.leveledResources.{{resourceIndex}}.pool.{{poolIndex}}.label"
+											value="{{poolItem.label}}" />
+									</th>
+									{{#each (repeat @root.document.system.maxLevel)}}
+										<td>
+											<input
+												type="text"
+												data-dtype="Number"
+												name="system.leveledResources.{{resourceIndex}}.pool.{{poolIndex}}.perLevel.{{@index}}"
+												value="{{#if (lookup poolItem.perLevel @index)}}{{lookup poolItem.perLevel @index}}{{else}}0{{/if}}" /> 
+										</td>
+									{{/each}}
+									<td class="controls">
+										<button type="button" class="delete-button delete-resource-pool" aria-label+"Delete Pool"><i class="fas fa-x"></i></button>
+									</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+				{{else}}
+					<p class="empty">No resources in this category.</p>
+				{{/if}}
+				<button type="button" class="add-resource-pool">Add Resource Pool</button>
+			</div>
+		{{else}}
+			<p class="empty">No resource categories available.</p>
+		{{/each}}
+
+		<button type="button" class="add-resource">Add Resource Category</button>
+	</div>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="spellList">
+		{{#if document.system.hasSpells}}
+			{{#each spells}}
+			<div class="control control--spell-list spell-list" data-list-type="spells">
+				<h2>Level {{add @index 1}}</h2>
+				{{> (partial 'document-list.hbs') documentlist=this }}
+			</div>
+			{{/each}}
+		{{else}}
+			<p class="empty">This class has no spells</p>
+		{{/if}}
+
+	</div>
+
+	{{!--
+	--}}
+	<div class="tab" data-group="main" data-tab="features">
+    {{#if document.system.featureItems}}
+			<div class="control control--feature-list" data-list-type="features">
+				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
+			</div>
+		{{else}}
+			<p class="empty">This class has no features</p>
+		{{/if}}
+	</div>
+
+</form>

@@ -1,0 +1,237 @@
+.bx-template--character-class {
+  
+  &.bx-template--view {
+    .document-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    @container page (min-width: 440px) {
+      :is(.spell-list, .class-details) .document-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @container page (min-width: 600px) {
+      :is(.spell-list) .document-list {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      :is(.class-details) .document-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .xp-table {
+      .saves {
+        background-color: var(--color-text-light-1);
+      }
+      caption {
+        caption-side: bottom;
+      }
+    }
+  }
+
+  &.bx-template--edit {
+    .delete-button {
+      font-size: .8em;
+      line-height: 1em;
+      padding: .25em;
+      border: none;
+      background: transparent;
+    }
+
+    .control {
+      &:is(.control--details, .control--requisite-grid) {
+        display: grid;
+        align-items: center;
+        gap: .5em;
+      }
+  
+      &--details {
+        grid-template-columns: repeat(2, max-content 1fr);
+
+        .details-grid {
+          &__heading {
+            grid-column: 1/5;
+          }
+    
+          &__field {
+            &--languages {
+              grid-column: 2/5;
+            }
+            &--gear-table {
+              display: grid;
+              grid-template-columns: 1fr max-content;
+              align-items: center;
+              gap: 1em;
+
+              .empty {
+                margin: 0;
+              }
+
+              .content-link {
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+        }
+      }
+
+      &--xp-table {
+        flex: 1;
+        overflow: scroll;
+      }
+  
+      &--requisite-grid {
+        grid-template-columns: max-content repeat(7, 1fr);
+  
+        .requisite-grid {
+          &__heading {
+            text-align: right ;
+            grid-column-start: 1;
+          }
+    
+          &__stat-label {
+            text-align: center;
+            &:first-of-type {
+              grid-column-start: 2;
+            }
+          }
+        }
+        input {
+          text-align: center;
+          justify-self: center;
+        }
+      }
+    }
+  }
+
+  .xp-table {
+    border-spacing: 20px;
+
+    .xp-field {
+      text-align: center;
+      max-width: 2em;
+
+      &--xp {
+        max-width: unset;
+      }
+    }
+
+    .empty {
+      text-align: center;
+      font-style: italic;
+      color: var(--color-text-dark-3);
+    }
+
+    :is(td, th) {
+      text-align: center;
+      padding: .25em;
+    }
+
+    td {
+      .flexrow {
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+        gap: .25em;
+      }
+    }
+  }
+
+  .resource {
+    &-category {
+      text-align: center;
+
+      header {
+        display: grid; 
+        grid-template-columns: max-content 1fr max-content;
+        align-items: center;
+        gap: 1em;
+        padding: 0 .25em;
+        margin-bottom: .5em;
+
+        input {
+          text-align: left;
+        }
+
+        button {
+          margin-right: .25em;
+        }
+      }
+
+      table {
+        white-space: nowrap;
+        margin: 0;
+        border: none;
+        border-spacing: 0;
+
+        thead {
+          th {
+            padding: 3px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+
+            &:first-child {
+              position: sticky;
+              left: 0;
+              z-index: 2;
+            }
+
+            &:first-of-type {
+              background-color: var(--color-text-dark-3);
+            }
+          }
+        }
+
+        td {
+          text-align: center;
+          input {
+            min-width: 1.75em;
+          }
+        }
+
+        tbody {
+          th {
+            position: relative;
+            background: url(/ui/parchment.jpg) repeat;
+            position: sticky;
+            left: 0;
+            z-index: 1;
+            &:first-child {
+
+            }
+          }
+        }
+      }
+    }
+
+    &-table {
+      max-width: 100%;
+      overflow: auto;
+    }
+
+    &-pools {
+      white-space: nowrap;
+
+      tbody {
+        :is(th, td) {
+          padding: .25em;
+        }
+
+        td input {
+          max-width: 3em;
+          text-align: center;
+        }
+      }
+
+      .delete-pool {
+        font-size: .8em;
+        padding: .5em;
+        line-height: 1em;
+      }
+    }
+  }
+}
