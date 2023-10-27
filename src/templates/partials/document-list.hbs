@@ -5,7 +5,7 @@
         {{#with (lookup this ../documentkey)}}
           <li class="document-list__item" data-uuid="{{uuid}}">
             <div class="icon-wrapper">
-              <img src="{{img}}" alt="{{name}}" />
+              <img src="{{img}}" alt="{{name}}" {{#if ../../nopopout}}class="nopopout"{{/if}} />
               {{#if (gt ../number 1)}}
                 {{#unless ../../isCountEditable}}
                   <span class="count">{{../number}}</span>
@@ -21,7 +21,7 @@
       {{else}}
         <li class="document-list__item" data-uuid="{{uuid}}">
           <div class="icon-wrapper">
-            <img src="{{img}}" alt="{{name}}" />
+            <img src="{{img}}" alt="{{name}}" {{#if ../nopopout}}class="nopopout"{{/if}} />
           </div>
           <span>{{name}}</span>
         </li>

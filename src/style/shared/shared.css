@@ -28,6 +28,7 @@
       border: 1px solid var(--color-border-light-tertiary);
       border-radius: .5em;
       box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+      background: url(/ui/parchment.jpg) repeat;
   
       &:has(input) {
         grid-template-columns: var(--sidebar-item-height) 1fr 3em;
@@ -60,9 +61,7 @@
         font-weight: bold;
       }
 
-      &:hover {
-        cursor: grab;
-      }
+      cursor: context-menu;
     }
   }
 }

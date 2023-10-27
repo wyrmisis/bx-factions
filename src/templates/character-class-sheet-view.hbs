@@ -13,7 +13,7 @@
 
 			<h2>{{localize "FACTIONS.templates.characterClass.edit.tabs.features"}}</h2>
 			{{#if document.system.featureItems.length}}
-				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems }}
+				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems nopopout=true }}
 			{{else}}
 				<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.features.view"}}</p>
 			{{/if}}
@@ -179,7 +179,7 @@
 		{{#each spells}}
 			<div class="control control--spell-list spell-list" data-list-type="spells">
 				<h3>{{localize "FACTIONS.templates.characterClass.spellLevel" level=(add @index 1)}}</h3>
-				{{> (partial 'document-list.hbs') documentlist=this }}
+				{{> (partial 'document-list.hbs') documentlist=this nopopout=true }}
 			</div>
 		{{/each}}
 	</article>

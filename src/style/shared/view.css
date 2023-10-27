@@ -5,6 +5,17 @@
   container-type: inline-size;
   container-name: page;
 
+  .document-list {
+    &__item {
+      cursor: grab;
+      transition: 333ms opacity ease-in-out; 
+      &:active {
+        cursor: grabbing;
+        opacity: .5;
+      }
+    }
+  }
+
   & > article {
     &:not(:last-of-type) {
       margin-bottom: .5em;
