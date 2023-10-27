@@ -109,8 +109,10 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
     if (this.isEditable) {
       this.activateEditListeners(html);
       this._contextMenu(html);
-    } else
+    } else {
       this.activateViewListeners(html);  
+      this.#documentListListeners(html);
+    }
   }
 
   activateEditListeners(html) {
@@ -153,5 +155,12 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
 
   async _contextMenu(html) {
     ContextMenu.create(this, html, ".document-list__item", await this.getContextOptions());
+  }
+
+  #documentListListeners(html) {
+    html.find('.document-list__item').click(async (event) => {
+      const document = await fromUuid(event.target.closest(".document-list__item[data-uuid]")?.dataset.uuid);
+      document?.sheet?.render(true);
+    });
   }
 }
