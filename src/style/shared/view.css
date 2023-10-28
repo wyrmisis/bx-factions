@@ -28,6 +28,11 @@
           grid-template-columns: 2fr 1fr;
           gap: 2em;
         }
+
+        aside {
+          max-width: 100%;
+          overflow: hidden;
+        }
       }
     }
   }

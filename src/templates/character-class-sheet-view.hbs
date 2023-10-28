@@ -36,13 +36,15 @@
 							<th>5%</th>
 							<td>
 								{{#each document.system.halfRequisitesFormatted}}
-									{{#if @last}}
-										{{#if @root.document.system.primerequisites.halfIsAnd}}
-											{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
-										{{else}}
-											{{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
+									{{#unless @first}}
+										{{#if @last}}
+											{{#if @root.document.system.primerequisites.halfIsAnd}}
+												{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
+											{{else}}
+												{{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
+											{{/if}}
 										{{/if}}
-									{{/if}}
+									{{/unless}}
 
 									{{this}} {{localize (concat "OSE.scores." @key '.short')}}
 									{{#unless @last}}
@@ -59,13 +61,15 @@
 							<th>10%</th>
 							<td>
 								{{#each document.system.fullRequisitesFormatted}}
-									{{#if @last}}
-										{{#if @root.document.system.primerequisites.fullIsAnd}}
-											{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
-										{{else}}
-											={{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
+									{{#unless @first}}
+										{{#if @last}}
+											{{#if @root.document.system.primerequisites.fullIsAnd}}
+												{{localize "FACTIONS.templates.characterClass.primerequisites.inclusive"}}
+											{{else}}
+												={{localize "FACTIONS.templates.characterClass.primerequisites.exclusive"}}
+											{{/if}}
 										{{/if}}
-									{{/if}}
+									{{/unless}}
 									
 									{{this}} {{localize (concat "OSE.scores." @key '.short')}}
 

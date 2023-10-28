@@ -29,6 +29,14 @@
         caption-side: bottom;
       }
     }
+
+    .gear-table {
+      .content-link {
+        overflow-x:  hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+    }
   }
 
   &.bx-template--edit {
