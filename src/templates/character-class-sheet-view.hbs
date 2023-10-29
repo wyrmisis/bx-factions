@@ -154,9 +154,7 @@
 					<td data-tooltip="{{localize "OSE.saves.spell.long"}}">{{levelObj.saves.spell}}</td>
 					{{#each ../document.system.leveledResources}}
 						{{#each pool}}
-							{{#with (lookup perLevel index) as |value|}}
-							<td>{{#if value}}{{value}}{{else}}&ndash;{{/if}}</td>
-							{{/with}}
+							<td>{{#if (lookup perLevel index)}}{{lookup perLevel index}}{{else}}&ndash;{{/if}}</td>
 						{{/each}}
 					{{/each}}
 				</tr>

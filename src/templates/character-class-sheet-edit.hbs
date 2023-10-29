@@ -229,7 +229,8 @@
 												type="text"
 												data-dtype="Number"
 												name="system.leveledResources.{{resourceIndex}}.pool.{{poolIndex}}.perLevel.{{@index}}"
-												value="{{#if (lookup poolItem.perLevel @index)}}{{lookup poolItem.perLevel @index}}{{else}}0{{/if}}" /> 
+												value="{{#if (lookup poolItem.perLevel @index)}}{{lookup poolItem.perLevel @index}}{{/if}}"
+												placeholder="&ndash;" /> 
 										</td>
 									{{/each}}
 									<td class="controls">

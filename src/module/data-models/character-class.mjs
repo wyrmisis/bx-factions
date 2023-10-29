@@ -127,7 +127,7 @@ export default class CharacterClassDataModel extends foundry.abstract.TypeDataMo
               perLevel: new fields.ArrayField(
                 // Third level: amount of this tier of resource at Index+1 level
                 // (Magic User of level 1 has "Spell Slots" > "1st" > 1)
-                new fields.NumberField({min: 0, blank: false, initial: 0 })
+                new fields.NumberField({ blank: true, nullable: true })
               )
             })
           )
