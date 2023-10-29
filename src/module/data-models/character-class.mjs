@@ -184,7 +184,7 @@ export default class CharacterClassDataModel extends foundry.abstract.TypeDataMo
       }), {});
   }
 
-  get hasPrequisites() {
+  get hasPrerequisites() {
     return !!Object.keys(this.prerequisitesFormatted).length;
   }
   get prerequisitesFormatted() {
