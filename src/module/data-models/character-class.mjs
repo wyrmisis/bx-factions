@@ -55,7 +55,7 @@ export default class CharacterClassDataModel extends foundry.abstract.TypeDataMo
 
       hitDieSize: new fields.NumberField({
         min: 4,
-        choices: [4, 6, 8, 12, 20],
+        choices: [4, 6, 8, 10, 12, 20],
         initial: 6,
         integer: true
       }),
