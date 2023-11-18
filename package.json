@@ -42,5 +42,10 @@
     "stylelint": "^14.8.2",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-order": "^5.0.0"
+  },
+  "prettier": {
+    "editorconfig": true,
+    "bracketSameLine": false,
+    "singleAttributePerLine": true
   }
 }
