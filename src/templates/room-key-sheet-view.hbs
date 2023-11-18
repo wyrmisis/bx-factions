@@ -1,58 +1,58 @@
 {{#if data.title.show}}
 <header class="journal-page-header">
-    <h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
-		{{#if document.system.img}}
-			<img src="{{document.system.img}}" />
-		{{/if}}
+	<h{{data.title.level}}>{{data.name}}</h{{data.title.level}}>
+	{{#if document.system.img}}
+	<img src="{{document.system.img}}" />
+	{{/if}}
 </header>
 {{/if}}
 
 <section class="journal-page-content bx-template bx-template--view bx-template--room-key">
 	<article>
 		<main>
-		{{#if description}}
+			{{#if description}}
 			{{{description}}}
-		{{else}}
+			{{else}}
 			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.description"}}</p>
-		{{/if}}
+			{{/if}}
 
-		{{#if secrets}}
+			{{#if secrets}}
 			<h2>{{localize "FACTIONS.templates.roomKey.secrets"}}</h2>
 			{{editor secrets target="system.secrets" engine=editor.engine editable=false}}
-		{{/if}}
+			{{/if}}
 
-		{{#if traps}}
+			{{#if traps}}
 			<h2>{{localize "FACTIONS.templates.roomKey.traps"}}</h2>
 			{{editor traps target="system.traps" engine=editor.engine editable=false}}
-		{{/if}}
+			{{/if}}
 		</main>
 
 		<aside>
 			<h2>{{localize "FACTIONS.templates.roomKey.inhabitants"}}</h2>
 			{{#if inhabitantNotes}}
-				{{{inhabitantNotes}}}
+			{{{inhabitantNotes}}}
 			{{/if}}
 
 			{{> (partial 'document-list.hbs') documentlist=inhabitants documentkey='actor'}}
 
 			{{#if (eq inhabitants.length 0)}}
-				{{#unless inhabitantNotes}}
-					<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.view"}}</p>
-				{{/unless}}
+			{{#unless inhabitantNotes}}
+			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.view"}}</p>
+			{{/unless}}
 			{{/if}}
 
 			<h2>{{localize "FACTIONS.templates.roomKey.treasure"}}</h2>
 			{{#if treasureNotes}}
-				{{{treasureNotes}}}
+			{{{treasureNotes}}}
 			{{/if}}
 
 			{{> (partial 'document-list.hbs') documentlist=treasure documentkey='item'}}
 
 
 			{{#if (eq treasure.length 0)}}
-				{{#unless treasureNotes}}
-					<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.view"}}</p>
-				{{/unless}}
+			{{#unless treasureNotes}}
+			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.view"}}</p>
+			{{/unless}}
 			{{/if}}
 		</aside>
 	</article>

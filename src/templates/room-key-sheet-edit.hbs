@@ -1,5 +1,5 @@
 <form class="{{cssClass}} flexcol bx-template bx-template--room-key bx-template--edit" autocomplete="off">
-  {{> journalEntryPageHeader}}
+	{{> journalEntryPageHeader}}
 
 	<nav class="tabs sheet-tabs" data-group="main" aria-role="Form Tab Navigation">
 		<a class="item" data-tab="description">{{localize "FACTIONS.templates.roomKey.edit.tabs.description"}}</a>
@@ -9,104 +9,105 @@
 	</nav>
 
 	{{!--
-		The Notes tab contains an editor intended to be
-		frequently updated by the GM. Use it to track faction
-		changes, interactions with PCs, and so on.
+	The Notes tab contains an editor intended to be
+	frequently updated by the GM. Use it to track faction
+	changes, interactions with PCs, and so on.
 	--}}
 	<div class="tab" data-group="main" data-tab="description">
 		<img data-edit="system.img" src="{{document.system.img}}" class="faction-banner" />
 
-    {{editor description
-			target="system.description"
-			class="journal-page-content"
-			button=false
-			editable=true
-    	engine=editor.engine
-			collaborate=editor.collaborate
+		{{editor description
+		target="system.description"
+		class="journal-page-content"
+		button=false
+		editable=true
+		engine=editor.engine
+		collaborate=editor.collaborate
 		}}
 	</div>
 
 	{{!--
-		The Information tab contains less frequently updated
-		text-based info for the faction.
+	The Information tab contains less frequently updated
+	text-based info for the faction.
 	--}}
 	<div class="tab" data-group="main" data-tab="secrets">
 		<div class="control">
 			<h2>{{localize "FACTIONS.templates.roomKey.secrets"}}</h2>
-	    {{editor secrets
-				target="system.secrets"
-				class="journal-page-content"
-				button=false
-				editable=true
-	    	engine=editor.engine
-				collaborate=editor.collaborate
+			{{editor secrets
+			target="system.secrets"
+			class="journal-page-content"
+			button=false
+			editable=true
+			engine=editor.engine
+			collaborate=editor.collaborate
 			}}
 		</div>
 
 		<div class="control">
 			<h2>{{localize "FACTIONS.templates.roomKey.traps"}}</h2>
-	    {{editor traps
-				target="system.traps"
-				class="journal-page-content"
-				button=false
-				editable=true
-	    	engine=editor.engine
-				collaborate=editor.collaborate
+			{{editor traps
+			target="system.traps"
+			class="journal-page-content"
+			button=false
+			editable=true
+			engine=editor.engine
+			collaborate=editor.collaborate
 			}}
 		</div>
 	</div>
 
 	{{!--
-		The Inhabitants tab contains a list of inhabitants of this room
-		as well as notes on said inhabitants.
+	The Inhabitants tab contains a list of inhabitants of this room
+	as well as notes on said inhabitants.
 	--}}
 	<div class="tab" data-group="main" data-tab="inhabitants">
 		<div class="control control--room-documents" data-list-type="inhabitant">
 			<h2>{{localize "FACTIONS.templates.roomKey.inhabitants"}}</h2>
 			{{#if inhabitants.length}}
-				{{> (partial 'document-list.hbs') documentlist=inhabitants documentkey="actor" isCountEditable=true nopopout=true}}
+			{{> (partial 'document-list.hbs') documentlist=inhabitants documentkey="actor" isCountEditable=true
+			nopopout=true}}
 			{{else}}
-				<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.edit"}}</p>
+			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.edit"}}</p>
 			{{/if}}
 		</div>
 
 		<div class="control">
 			<h2>{{localize "FACTIONS.templates.roomKey.inhabitantNotes"}}</h2>
-	    {{editor inhabitantNotes
-				target="system.inhabitantNotes"
-				class="journal-page-content"
-				button=false
-				editable=true
-	    	engine=editor.engine
-				collaborate=editor.collaborate
+			{{editor inhabitantNotes
+			target="system.inhabitantNotes"
+			class="journal-page-content"
+			button=false
+			editable=true
+			engine=editor.engine
+			collaborate=editor.collaborate
 			}}
 		</div>
 	</div>
 
 	{{!--
-		The Treasure tab contains a list of treasure in this room
-		as well as notes on said inhabitants.
+	The Treasure tab contains a list of treasure in this room
+	as well as notes on said inhabitants.
 	--}}
 	<div class="tab" data-group="main" data-tab="treasure">
 		<div class="control control--room-documents" data-list-type="treasure">
 			<h2>{{localize "FACTIONS.templates.roomKey.treasure"}}</h2>
 
 			{{#if treasure.length}}
-				{{> (partial 'document-list.hbs') documentlist=treasure documentkey="item" isCountEditable=true nopopout=true}}
+			{{> (partial 'document-list.hbs') documentlist=treasure documentkey="item" isCountEditable=true nopopout=true}}
 			{{else}}
-				<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.edit"}}</p>
+			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.edit"}}</p>
 			{{/if}}
-		</div>		
+		</div>
 
 		<div class="control">
 			<h2>{{localize "FACTIONS.templates.roomKey.treasureNotes"}}</h2>
-	    {{editor treasureNotes
-				target="system.treasureNotes"
-				class="journal-page-content"
-				button=false
-				editable=true
-	    	engine=editor.engine
-				collaborate=editor.collaborate
+			{{editor treasureNotes
+			target="system.treasureNotes"
+			class="journal-page-content"
+			button=false
+			editable=true
+			engine=editor.engine
+			collaborate=editor.collaborate
 			}}
 		</div>
 	</div>
