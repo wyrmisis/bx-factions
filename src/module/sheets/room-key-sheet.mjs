@@ -1,4 +1,3 @@
-
 import BXTemplateBaseSheet from "./__base-sheet";
 
 export default class RoomKeySheet extends BXTemplateBaseSheet {
@@ -9,11 +8,11 @@ export default class RoomKeySheet extends BXTemplateBaseSheet {
 
   templateBase = 'room-key';
 
-  async getData(options={}) {
+  async getData(options = {}) {
     const falsyIfEmptyP = (str) => str === "<p></p>" ? "" : str;
-    
+
     const context = await super.getData(options);
-    
+
     context.description = await TextEditor.enrichHTML(
       falsyIfEmptyP(this.object.system.description), {
       async: true,
@@ -47,7 +46,7 @@ export default class RoomKeySheet extends BXTemplateBaseSheet {
 
     context.inhabitants = await Promise.all(this.object.system.inhabitantActors);
     context.treasure = await Promise.all(this.object.system.treasureItems);
-    
+
     return context;
   }
 
@@ -98,8 +97,12 @@ export default class RoomKeySheet extends BXTemplateBaseSheet {
   }
 
   activateEditListeners(html) {
-    html.on("change", ".document-list__item__quantity", this.#handleUpdateInhabitantCount.bind(this));
+    html.on(
+      "change",
+      ".document-list__item__quantity",
+      this.#handleUpdateInhabitantCount.bind(this)
+    );
   }
 
-  activateViewListeners(html) {}
+  activateViewListeners(html) { }
 }

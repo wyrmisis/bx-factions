@@ -19,7 +19,7 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
 
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      tabs: [{navSelector: ".tabs", contentSelector: "form", initial: "notes"}],
+      tabs: [{ navSelector: ".tabs", contentSelector: "form", initial: "notes" }],
       submitOnChange: true,
       dragDrop: [
         {
@@ -28,12 +28,12 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
       ]
     });
   }
-  
+
   get template() {
     return `${templatePath}/${this.templateBase}-sheet-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
-  async _onDragStart(event) {    
+  async _onDragStart(event) {
     const document = await fromUuid(event.target.closest(".document-list__item[data-uuid]")?.dataset.uuid);
     const dragData = document.toDragData();
     if (!dragData) return;
@@ -55,7 +55,14 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
     const object = foundry.utils.flattenObject(this.object);
     // Unique items (notable faction members, random tables) come in as strings
     // Nonunique items (faction members, room inhabitants, treasure) come in as objects 
-    const uuid = typeof dropped === 'string' ? dropped : dropped.uuid;
+    let uuid = typeof dropped === 'string' ? dropped : dropped.uuid;
+    // Unfortunately, when we get things from a compendium, there's a chance
+    // we could get something in the format of `Compendium.[module].[compendium-id].[id]`
+    // The below should get us the "true" UUID, which includes the document type.
+    uuid = fromUuidSync(uuid)?.uuid;
+    // and if doesn't, bail.
+    if (!uuid) return;
+
     // Use this key to update the this.object
     const adjustedKey = `system.${key}`;
 
@@ -70,8 +77,8 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
       if (indexInList !== -1)
         list[indexInList].number++;
       else
-        list = [...list, {uuid, number: 1}];
-      list = list.filter(({uuid}) => !!uuid);
+        list = [...list, { uuid, number: 1 }];
+      list = list.filter(({ uuid }) => !!uuid);
     }
 
     if (!list) return;
@@ -84,23 +91,27 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
   }
 
   handleDelete(targetUuid, key, { hasIncrement } = {}) {
-    const incrementFilter = ({uuid}) => uuid !== targetUuid;
-    const singleFilter = (uuid) => uuid !== targetUuid;
+    const actualUuid = fromUuidSync(targetUuid)?.uuid;
+    if (!actualUuid) return;
+    const incrementFilter = ({ uuid }) => uuid !== actualUuid;
+    const singleFilter = (uuid) => uuid !== actualUuid;
     const object = foundry.utils.flattenObject(this.object);
     const adjustedKey = `system.${key}`;
     let list = [...object[adjustedKey]]
       .filter(hasIncrement ? incrementFilter : singleFilter);
 
-    this.object.update({ [adjustedKey]: list});
+    this.object.update({ [adjustedKey]: list });
   }
 
-  handleUpdateQuantity(uuid, key, value) {
+  handleUpdateQuantity(targetUuid, key, value) {
+    const actualUuid = fromUuidSync(targetUuid)?.uuid;
+    if (!actualUuid) return;
     const object = foundry.utils.flattenObject(this.object);
     const adjustedKey = `system.${key}`;
     let list = [...object[adjustedKey]];
-    const indexInList = list.findIndex(a => a.uuid === uuid);
+    const indexInList = list.findIndex(a => a.uuid === actualUuid);
     list[indexInList].number = value;
-    this.object.update({ [adjustedKey]: list.filter(({uuid}) => !!uuid) });
+    this.object.update({ [adjustedKey]: list.filter(({ uuid }) => !!uuid) });
   }
 
   activateListeners(html) {
@@ -110,7 +121,7 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
       this.activateEditListeners(html);
       this._contextMenu(html);
     } else {
-      this.activateViewListeners(html);  
+      this.activateViewListeners(html);
       this.#documentListListeners(html);
     }
   }
@@ -125,7 +136,7 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
 
   async getContextOptions() {
     const getActor = async (node) => await fromUuid(node.data("uuid"));
-    
+
     return [{
       name: "SIDEBAR.Edit",
       icon: '<i class="fas fa-edit"></i>',
@@ -145,7 +156,7 @@ export default class BXTemplateBaseSheet extends JournalTextPageSheet {
         return this.isEditable && actor?.canUserModify(game.user, "delete")
       },
       callback: async (li) => {
-        const {uuid} = await getActor(li);
+        const { uuid } = await getActor(li);
         if (!uuid) return;
         const listType = li.closest('[data-list-type]').data("list-type");
         this.delegateDeleteAction(uuid, listType);
