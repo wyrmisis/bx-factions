@@ -7,4 +7,12 @@ Hooks.once('init', async function() {
     type: Boolean,
     config: true,
   });
+  game.settings.register(game.modules.get('bx-factions').id, "useFactionMorality", {
+    name: game.i18n.localize("FACTIONS.settings.useFactionMorality.label"),
+    hint: game.i18n.localize("FACTIONS.settings.useFactionMorality.hint"),
+    default: false,
+    scope: "world",
+    type: Boolean,
+    config: true,
+  });
 });

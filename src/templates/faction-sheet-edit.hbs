@@ -90,10 +90,19 @@
 	--}}
 	<div class="tab" data-group="main" data-tab="relationships">
 		<div class="control">
-			<h2>{{localize "FACTIONS.templates.faction.alignment.label"}}</h2>
+			<h2>{{localize "FACTIONS.templates.faction.alignment.heading"}}</h2>
+			<label for="system.alignment">{{localize "FACTIONS.templates.faction.alignment.labelAlignment"}}</label>
 			<select name="system.alignment" value="{{data.system.alignment}}">
 			{{#select data.system.alignment}}
 				{{#each alignmentOptions}}
+			  <option value="{{localize this}}">{{localize this}}</option>
+				{{/each}}
+			{{/select}}
+			</select>
+			<label for="system.morality">{{localize "FACTIONS.templates.faction.alignment.labelMorality"}}</label>
+			<select name="system.morality" value="{{data.system.morality}}">
+			{{#select data.system.morality}}
+				{{#each moralityOptions}}
 			  <option value="{{localize this}}">{{localize this}}</option>
 				{{/each}}
 			{{/select}}

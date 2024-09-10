@@ -10,6 +10,10 @@
       "useFactionRepModifiers": {
         "label": "Use Faction Reputation Modifiers",
         "hint": "Enables controls for and display of UI elements related to fame/infamy trackers for reaction modifiers."
+      },
+      "useFactionMorality": {
+        "label": "Use Faction Morality",
+        "hint": "Enables controls for and display of UI elements related to a faction's morality (Good/Neutral/Evil)."
       }
     },
     "templates": {
@@ -23,10 +27,16 @@
           "modifier": "Reaction modifier"
         },
         "alignment": {
-          "label": "Faction alignment",
+          "heading": "Faction alignment",
+          "labelAlignment": "Alignment",
+          "labelMorality": "Morality",
           "lawful": "Lawful",
           "neutral": "Neutral",
-          "chaotic": "Chaotic"
+          "chaotic": "Chaotic",
+          "good": "Good",
+          "evil": "Evil",
+          "trueNeutral": "True Neutral",
+          "unaligned": "Unaligned"
         },
         "goals": "Goals",
         "territory": "Holdings and Territory",

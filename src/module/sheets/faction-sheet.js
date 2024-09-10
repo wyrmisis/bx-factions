@@ -64,7 +64,15 @@ export default class FactionSheet extends BXTemplateBaseSheet {
       "FACTIONS.templates.faction.alignment.chaotic"
     ];
 
+    context.moralityOptions = [
+      "FACTIONS.templates.faction.alignment.good",
+      "FACTIONS.templates.faction.alignment.neutral",
+      "FACTIONS.templates.faction.alignment.evil"
+    ];
+
     context.canDisplayReputation = game.settings.get('bx-factions', 'useFactionRepModifiers');
+
+    context.displayedAlignment = this.object.system.displayedAlignment;
     
     return context;
   }

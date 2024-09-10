@@ -24,6 +24,16 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
         ],
         initial: game.i18n.localize("FACTIONS.templates.faction.alignment.neutral"),
       }),
+      morality: new fields.StringField({
+        required: true,
+        blank: false,
+        choices: [
+          game.i18n.localize("FACTIONS.templates.faction.alignment.good"),
+          game.i18n.localize("FACTIONS.templates.faction.alignment.neutral"),
+          game.i18n.localize("FACTIONS.templates.faction.alignment.evil"),
+        ],
+        initial: game.i18n.localize("FACTIONS.templates.faction.alignment.neutral"),
+      }),
       fame: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
       infamy: new fields.NumberField({min: 0, max: 3, initial: 0, integer: true}),
 
@@ -67,5 +77,31 @@ export default class FactionDataModel extends foundry.abstract.TypeDataModel {
         ({ uuid, number }) => ({ actor: fromUuidSync(uuid), number })
       )
       .filter(({actor}) => !!actor);
+  }
+
+  get isTrueNeutral() {
+    return game.settings.get('bx-factions', 'useFactionMorality') &&
+      this.alignment === game.i18n.localize("FACTIONS.templates.faction.alignment.neutral") &&
+      this.morality === game.i18n.localize("FACTIONS.templates.faction.alignment.neutral")
+  }
+
+  get displayedAlignment() {
+    if (this.isTrueNeutral)
+      return game.i18n.localize("FACTIONS.templates.faction.alignment.trueNeutral")
+
+    const shouldUseFactionMorality = game.settings.get('bx-factions', 'useFactionMorality');
+
+    if (!shouldUseFactionMorality)
+      return game.i18n.localize(this.alignment);
+
+    if (!this.morality && !this.alignment)
+      return game.i18n.localize("FACTIONS.templates.faction.alignment.unaligned");
+
+    if (!this.morality)
+      return game.i18n.localize(this.alignment);
+    if (!this.alignment)
+      return game.i18n.localize(this.morality);
+
+    return `${this.alignment} ${this.morality}`
   }
 }
