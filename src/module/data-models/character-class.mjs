@@ -158,13 +158,15 @@ export default class CharacterClassDataModel extends foundry.abstract.TypeDataMo
     const items = await Promise.all(this.spellList.map(i => fromUuid(i)));
     const highestLevel = items
       .reduce((highest, i) => {
-          return i.system.lvl > highest 
-            ? i.system.lvl
+          return i?.system?.lvl > highest 
+            ? i?.system?.lvl
             : highest
-        }, 1 );
+        }, 0 );
+    if (!highestLevel) return [];
     const list = new Array(highestLevel).fill(null).map(() => []);
     items.forEach(i => {
-      const idx = (i.system.lvl || 1) - 1;
+      if (!i) return; // If the item doesn't exist, bail
+      const idx = (i?.system?.lvl || 1) - 1;
       try {
         list[idx].push(i)
       } catch (e) {
@@ -212,6 +214,6 @@ export default class CharacterClassDataModel extends foundry.abstract.TypeDataMo
   }
 
   get hasSpells() {
-    return !!this.spellList.length;
+    return !!this.spellList.map(i => fromUuidSync(i)).filter(i => !!i).length;
   }
 }

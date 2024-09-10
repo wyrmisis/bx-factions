@@ -5,7 +5,6 @@
     "characterClass": "Character Class (OSE)",
     "levelOverview": "Dungeon Level Overview"
   },
-
   "FACTIONS": {
     "settings": {
       "useFactionRepModifiers": {
@@ -13,41 +12,34 @@
         "hint": "Enables controls for and display of UI elements related to fame/infamy trackers for reaction modifiers."
       }
     },
-
     "templates": {
       "faction": {
         "sheetName": "Faction Sheet",
-  
         "name": "Name",
-        
         "reputation": {
           "label": "Player reputation",
           "fame": "Fame",
           "infamy": "Infamy",
           "modifier": "Reaction modifier"
         },
-        
         "alignment": {
           "label": "Faction alignment",
           "lawful": "Lawful",
           "neutral": "Neutral",
           "chaotic": "Chaotic"
         },
-        
         "goals": "Goals",
         "territory": "Holdings and Territory",
         "resources": "Resources",
         "relationships": "Relationships with other factions",
         "description": "Description",
         "notes": "Notes",
-        
         "members": {
           "label": "Membership",
           "notable": "Notable individuals",
           "others": "Members",
           "reinforcements": "Reinforcement procedures"
         },
-
         "edit": {
           "tabs": {
             "notes": "Notes",
@@ -57,7 +49,6 @@
             "membership": "Membership"
           }
         },
-
         "empty": {
           "goals": "This faction has no recorded goals",
           "territory": "This faction has no recorded territory",
@@ -72,12 +63,10 @@
             "view": "This faction has no members",
             "edit": "This faction has no members. Drag Actors to add them to this faction"
           }
-        }       
+        }
       },
-
       "roomKey": {
         "sheetName": "Room Key Sheet",
-
         "description": "Description",
         "secrets": "Secrets",
         "traps": "Traps",
@@ -85,7 +74,6 @@
         "treasureNotes": "Notes",
         "inhabitants": "Inhabitants",
         "inhabitantNotes": "Notes",
-
         "edit": {
           "tabs": {
             "description": "Description",
@@ -94,7 +82,6 @@
             "secrets": "Secrets"
           }
         },
-
         "empty": {
           "description": "This room has no description",
           "secrets": "This room has no secrets",
@@ -109,14 +96,83 @@
           }
         }
       },
-
       "levelOverview": {
-        "sheetName": "Dungeon Level Overview Sheet"
+        "sheetName": "Dungeon Level Overview Sheet",
+        "access": {
+          "from": "From",
+          "to": "To",
+          "notes": "Notes",
+          "delete": "Delete access point",
+          "add": "Add Access Point"
+        },
+        "notable": {
+          "npcs": "Notable NPCs",
+          "factions": "Factions"
+        },
+        "frequency": {
+          "turns": "Turns",
+          "minutes": "Minutes",
+          "hours": "Hours"
+        },
+        "grouping": {
+          "rooms": "Per-Room",
+          "regions": "Regional",
+          "fullLevel": "Full Level"
+        },
+        "encounters": {
+          "groupType": "Type",
+          "locations": "Locations",
+          "rooms": "Rooms",
+          "regions": "Regions",
+          "frequency": {
+            "label": "Frequency",
+            "every": "Every",
+            "XinY": "in",
+            "chance": "chance"
+          },
+          "formula": "Formula",
+          "table": "Roll Table",
+          "notes": "Notes",
+          "add": "Add Encounter Table"
+        },
+        "regions": {
+          "name": "Name",
+          "rooms": "Rooms",
+          "add": "Add Region"
+        },
+        "edit": {
+          "tabs": {
+            "description": "Description",
+            "access": "Access",
+            "regions": "Regions",
+            "encounters": "Random Encounters",
+            "notables": "NPCs/Factions"
+          }
+        },
+        "empty": {
+          "access": {
+            "edit": "This level has no listed access points. Click the \"Add Access Point\" button to add one!"
+          },
+          "encounters": {
+            "edit": "This level has no encounter tables. Click the \"Add Encounter Table\" button to add one!"
+          },
+          "regions": {
+            "edit": "This level has no listed regions. Click the \"Add Region\" button to add one!"
+          },
+          "notable": {
+            "npcs": {
+              "view": "This level has no notable NPCs.",
+              "edit": "This level has no notable NPCs. Drag Actors to add them to this level"
+            },
+            "factions": {
+              "view": "No factions are active on this level.",
+              "edit": "No factions are active on this level. Drag Faction journal pages here to add them to this level."
+            }
+          }
+        }
       },
-
       "characterClass": {
         "sheetName": "Character Class Sheet",
-
         "hitDieSize": "Hit Die",
         "maxLevel": "Maximum Level",
         "armor": "Armour",
@@ -133,7 +189,6 @@
           "exclusive": "or"
         },
         "spellLevel": "Level {level}",
-
         "advancement": {
           "level": "Lv.",
           "xp": "XP",
@@ -144,16 +199,14 @@
             "conMod": "Modifiers from CON no longer apply"
           },
           "conMod": "Con Mod?",
-
           "add": "Add Level",
           "remove": "Remove Last Level"
         },
-
         "resources": {
           "category": {
             "label": "Category",
-            "add": "Add Resource Category", 
-            "remove": "Remove Resource Category" 
+            "add": "Add Resource Category",
+            "remove": "Remove Resource Category"
           },
           "pool": {
             "label": "Resource",
@@ -161,7 +214,6 @@
             "remove": "Remove Resource"
           }
         },
-        
         "edit": {
           "tabs": {
             "description": "Description",
@@ -172,7 +224,6 @@
             "features": "Class Features"
           }
         },
-
         "empty": {
           "gearTable": "Unassigned",
           "secrets": "This room has no secrets",

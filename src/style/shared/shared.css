@@ -64,5 +64,15 @@
       cursor: context-menu;
     }
   }
+
+  .sticky-table {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    thead {
+      position: sticky;
+      top: 0;
+    }
+  }
 }
 

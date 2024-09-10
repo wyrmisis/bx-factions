@@ -1,3 +1,13 @@
+/**
+ * @file THE INIT HOOK
+ * 
+ * Things to do here:
+ * - Tell Foundry to use our templates' data models 
+ * - If there are templates that rely on system-specific stuff,
+ *   set that up here
+ * - Register sheets!
+ */
+
 // Data Models
 import FactionDataModel from "../data-models/faction.mjs";
 import RoomKeyDataModel from "../data-models/room-key.mjs";
@@ -11,15 +21,6 @@ import CharacterClassSheet from "../sheets/character-class-sheet.js";
 // Helpers
 import registerHandlebarsHelpers from "../config/handlebars.mjs";
 
-/**
- * THE INIT HOOK
- * 
- * Things to do here:
- * - Tell Foundry to use our templates' data models 
- * - If there are templates that rely on system-specific stuff,
- *   set that up here
- * - Register sheets!
- */
 Hooks.once('init', async function() {
   Object.assign(CONFIG.JournalEntryPage.dataModels, {
     "bx-factions.faction": FactionDataModel,

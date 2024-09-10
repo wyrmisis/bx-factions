@@ -115,7 +115,7 @@
 	--}}
 	<div class="tab" data-group="main" data-tab="xp">
 		<div class="control control--xp-table">
-			<table class="xp-table">
+			<table class="xp-table sticky-table">
 				<thead>
 					<tr>
 						<th rowspan="2">{{localize "FACTIONS.templates.characterClass.advancement.level"}}</th>
@@ -157,7 +157,7 @@
 							</span>
 						</td>
 						<td>
-							<input type="checkbox" name="system.xp.{{index}}.hd.canUseConMod" data-tooltip="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" data-label="{{localize "FACTIONS.templates.characterClass.canUseConMod"}}" {{checked levelObj.hd.canUseConMod}} />
+							<input type="checkbox" name="system.xp.{{index}}.hd.canUseConMod" data-tooltip="{{localize "FACTIONS.templates.characterClass.advancement.conMod"}}" aria-label="{{localize "FACTIONS.templates.characterClass.advancement.conMod"}}" {{checked levelObj.hd.canUseConMod}} />
 						</td>
 						<td>
 							<input type="text" data-dtype="Number" class="xp-field xp-field--" name="system.xp.{{index}}.saves.death" value="{{levelObj.saves.death}}" />
@@ -186,10 +186,10 @@
 			</table>
 		</div>
 
-		<div class="control control--xp-buttons flexrow">
+		<footer class="tab-controls flexrow">
 			<button type="button" class="add-level"><i class="fas fa-plus"></i> {{localize "FACTIONS.templates.characterClass.advancement.add"}}</button>
 			<button type="button" class="remove-level"><i class="fas fa-minus"></i> {{localize "FACTIONS.templates.characterClass.advancement.remove"}}</button>
-		</div>
+		</footer>
 	</div>
 
 	{{!--
@@ -250,7 +250,9 @@
 			<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.resources.category"}}</p>
 		{{/each}}
 
-		<button type="button" class="add-resource">{{localize "FACTIONS.templates.characterClass.resources.category.add"}}</button>
+		<footer class="tab-controls">
+			<button type="button" class="add-resource">{{localize "FACTIONS.templates.characterClass.resources.category.add"}}</button>
+		</footer>
 	</div>
 
 	{{!--

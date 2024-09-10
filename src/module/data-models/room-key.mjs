@@ -6,30 +6,30 @@ export default class RoomKeyDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
     return {
-      description: new fields.HTMLField({required: false, blank: true}),
+      description: new fields.HTMLField({ required: false, blank: true }),
       img: new fields.FilePathField({
         required: false,
         categories: ["IMAGE"],
       }),
 
-      inhabitantNotes: new fields.HTMLField({required: false, blank: true}),
+      inhabitantNotes: new fields.HTMLField({ required: false, blank: true }),
       inhabitants: new fields.ArrayField(
         new fields.SchemaField({
-          uuid: new fields.StringField({required: false, blank: false}),
-          number: new fields.NumberField({min: 0, integer: true})
+          uuid: new fields.StringField({ required: false, blank: false }),
+          number: new fields.NumberField({ min: 0, integer: true })
         })
       ),
 
-      treasureNotes: new fields.HTMLField({required: false, blank: true}),
+      treasureNotes: new fields.HTMLField({ required: false, blank: true }),
       treasure: new fields.ArrayField(
         new fields.SchemaField({
-          uuid: new fields.StringField({required: false, blank: false}),
-          number: new fields.NumberField({min: 0, integer: true})
+          uuid: new fields.StringField({ required: false, blank: false }),
+          number: new fields.NumberField({ min: 0, integer: true })
         })
       ),
-      
-      secrets: new fields.HTMLField({required: false, blank: true}),
-      traps: new fields.HTMLField({required: false, blank: true}),
+
+      secrets: new fields.HTMLField({ required: false, blank: true }),
+      traps: new fields.HTMLField({ required: false, blank: true }),
     };
   }
 
@@ -40,7 +40,7 @@ export default class RoomKeyDataModel extends foundry.abstract.TypeDataModel {
       .map(
         ({ uuid, number }) => ({ actor: fromUuidSync(uuid), number })
       )
-      .filter(({actor}) => !!actor);
+      .filter(({ actor }) => !!actor);
   }
 
   get treasureItems() {
@@ -48,6 +48,6 @@ export default class RoomKeyDataModel extends foundry.abstract.TypeDataModel {
       .map(
         ({ uuid, number }) => ({ item: fromUuidSync(uuid), number })
       )
-      .filter(({item}) => !!item);
+      .filter(({ item }) => !!item);
   }
 }
