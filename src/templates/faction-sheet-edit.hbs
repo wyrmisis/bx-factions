@@ -99,6 +99,7 @@
 				{{/each}}
 			{{/select}}
 			</select>
+			{{#if shouldUseFactionMorality}}
 			<label for="system.morality">{{localize "FACTIONS.templates.faction.alignment.labelMorality"}}</label>
 			<select name="system.morality" value="{{data.system.morality}}">
 			{{#select data.system.morality}}
@@ -106,6 +107,7 @@
 			  <option value="{{localize this}}">{{localize this}}</option>
 				{{/each}}
 			{{/select}}
+			{{/if}}
 			</select>
 		</div>	
 		{{#if canDisplayReputation}}

@@ -74,6 +74,8 @@ export default class FactionSheet extends BXTemplateBaseSheet {
 
     context.displayedAlignment = this.object.system.displayedAlignment;
     
+    context.shouldUseFactionMorality = game.settings.get('bx-factions', 'useFactionMorality');
+
     return context;
   }
 
