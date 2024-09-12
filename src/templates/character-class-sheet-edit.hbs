@@ -263,7 +263,7 @@
 			<div class="control control--spell-list spell-list" data-list-type="spells">
 				<h2>Level {{add @index 1}}</h2>
 				{{#if this.length}}
-					{{> (partial 'document-list.hbs') documentlist=this nopopout=true }}
+					{{> (bxTemplatePartial 'document-list.hbs') documentlist=this nopopout=true }}
 				{{else}}
 				<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.spellList.atLevel"}}</p>
 				{{/if}}
@@ -280,7 +280,7 @@
 	<div class="tab" data-group="main" data-tab="features">
     {{#if document.system.featureItems}}
 			<div class="control control--feature-list" data-list-type="features">
-				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems nopopout=true }}
+				{{> (bxTemplatePartial 'document-list.hbs') documentlist=document.system.featureItems nopopout=true }}
 			</div>
 		{{else}}
 			<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.features.edit"}}</p>

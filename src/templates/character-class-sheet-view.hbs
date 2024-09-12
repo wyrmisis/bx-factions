@@ -13,7 +13,7 @@
 
 			<h2>{{localize "FACTIONS.templates.characterClass.edit.tabs.features"}}</h2>
 			{{#if document.system.featureItems.length}}
-				{{> (partial 'document-list.hbs') documentlist=document.system.featureItems nopopout=true }}
+				{{> (bxTemplatePartial 'document-list.hbs') documentlist=document.system.featureItems nopopout=true }}
 			{{else}}
 				<p class="empty">{{localize "FACTIONS.templates.characterClass.empty.features.view"}}</p>
 			{{/if}}

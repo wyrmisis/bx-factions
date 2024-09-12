@@ -64,7 +64,7 @@
 		<div class="control control--room-documents" data-list-type="inhabitant">
 			<h2>{{localize "FACTIONS.templates.roomKey.inhabitants"}}</h2>
 			{{#if inhabitants.length}}
-			{{> (partial 'document-list.hbs') documentlist=inhabitants documentkey="actor" isCountEditable=true
+			{{> (bxTemplatePartial 'document-list.hbs') documentlist=inhabitants documentkey="actor" isCountEditable=true
 			nopopout=true}}
 			{{else}}
 			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.inhabitants.edit"}}</p>
@@ -93,7 +93,7 @@
 			<h2>{{localize "FACTIONS.templates.roomKey.treasure"}}</h2>
 
 			{{#if treasure.length}}
-			{{> (partial 'document-list.hbs') documentlist=treasure documentkey="item" isCountEditable=true nopopout=true}}
+			{{> (bxTemplatePartial 'document-list.hbs') documentlist=treasure documentkey="item" isCountEditable=true nopopout=true}}
 			{{else}}
 			<p class="empty">{{localize "FACTIONS.templates.roomKey.empty.treasure.edit"}}</p>
 			{{/if}}

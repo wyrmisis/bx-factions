@@ -76,14 +76,14 @@
 
 			<h3>{{localize "FACTIONS.templates.faction.members.notable"}}</h3>
 			{{#if (gt notableActors.length 0)}}
-				{{> (partial 'document-list.hbs') documentlist=notableActors}}
+				{{> (bxTemplatePartial 'document-list.hbs') documentlist=notableActors}}
 			{{else}}
 				<p class="empty">{{localize "FACTIONS.templates.faction.empty.notables.view"}}</p>
 			{{/if}}
 
 			<h3>{{localize "FACTIONS.templates.faction.members.others"}}</h3>
 			{{#if (gt memberActors.length 0)}}
-				{{> (partial 'document-list.hbs') documentlist=memberActors documentkey="actor"}}
+				{{> (bxTemplatePartial 'document-list.hbs') documentlist=memberActors documentkey="actor"}}
 			{{else}}
 				<p class="empty">{{localize "FACTIONS.templates.faction.empty.members.view"}}</p>
 			{{/if}}

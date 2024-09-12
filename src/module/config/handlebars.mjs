@@ -2,7 +2,7 @@ import { partialPath } from "./constants.mjs";
 
 const registerHandlebarsHelpers = async () => {
   Handlebars.registerHelper(
-    'partial', 
+    'bxTemplatePartial', 
     (path) => `${partialPath}/${path}`
   )
 

@@ -33,7 +33,7 @@
 			{{{inhabitantNotes}}}
 			{{/if}}
 
-			{{> (partial 'document-list.hbs') documentlist=inhabitants documentkey='actor'}}
+			{{> (bxTemplatePartial 'document-list.hbs') documentlist=inhabitants documentkey='actor'}}
 
 			{{#if (eq inhabitants.length 0)}}
 			{{#unless inhabitantNotes}}

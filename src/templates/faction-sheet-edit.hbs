@@ -169,7 +169,7 @@
 			<section data-list-type="notable">
 				<h2>{{localize "FACTIONS.templates.faction.members.notable"}}</h2>
 				{{#if notableActors}}
-					{{> (partial 'document-list.hbs') documentlist=notableActors nopopout=true }}
+					{{> (bxTemplatePartial 'document-list.hbs') documentlist=notableActors nopopout=true }}
 				{{else}}
 					<p class="empty">{{localize "FACTIONS.templates.faction.empty.notables.edit"}}</p>
 				{{/if}}
@@ -178,7 +178,7 @@
 			<section data-list-type="member">
 				<h2>{{localize "FACTIONS.templates.faction.members.others"}}</h2>
 				{{#if memberActors.length}}
-					{{> (partial 'document-list.hbs') documentlist=memberActors documentkey="actor" isCountEditable=true nopopout=true}}
+					{{> (bxTemplatePartial 'document-list.hbs') documentlist=memberActors documentkey="actor" isCountEditable=true nopopout=true}}
 				{{else}}
 					<p class="empty">{{localize "FACTIONS.templates.faction.empty.members.edit"}}</p>
 				{{/if}}
