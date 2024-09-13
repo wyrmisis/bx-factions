@@ -46,7 +46,7 @@
 			{{{treasureNotes}}}
 			{{/if}}
 
-			{{> (partial 'document-list.hbs') documentlist=treasure documentkey='item'}}
+			{{> (bxTemplatePartial 'document-list.hbs') documentlist=treasure documentkey='item'}}
 
 
 			{{#if (eq treasure.length 0)}}

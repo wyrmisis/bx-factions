@@ -180,7 +180,7 @@
 		{{#each spells}}
 			<div class="control control--spell-list spell-list" data-list-type="spells">
 				<h3>{{localize "FACTIONS.templates.characterClass.spellLevel" level=(add @index 1)}}</h3>
-				{{> (partial 'document-list.hbs') documentlist=this nopopout=true }}
+				{{> (bxTemplatePartial 'document-list.hbs') documentlist=this nopopout=true }}
 			</div>
 		{{/each}}
 	</article>
