@@ -8,12 +8,8 @@
       "discord": "wyrmisis"
     }
   ],
-  "esmodules": [
-    "dist/js/bundle.min.js"
-  ],
-  "styles": [
-    "dist/css/bundle.css"
-  ],
+  "esmodules": ["dist/js/bundle.min.js"],
+  "styles": ["dist/css/bundle.css"],
   "languages": [
     {
       "lang": "en",
@@ -22,9 +18,9 @@
     }
   ],
   "compatibility": {
-    "minimum": 11,
-    "verified": 12,
-    "maximum": 12
+    "minimum": 12,
+    "verified": 13,
+    "maximum": 13
   },
   "license": "LICENSE",
   "version": "auto-replaced",
@@ -34,13 +30,26 @@
   "documentTypes": {
     "JournalEntryPage": {
       "faction": {
-        "htmlFields": ["description", "notes", "renforcements", "territory", "relationships", "goals"],
+        "htmlFields": [
+          "description",
+          "notes",
+          "renforcements",
+          "territory",
+          "relationships",
+          "goals"
+        ],
         "filePathFields": {
           "img": ["IMAGE"]
         }
       },
       "roomKey": {
-        "htmlFields": ["description", "inhabitantNotes", "treasureNotes", "traps", "secrets" ],
+        "htmlFields": [
+          "description",
+          "inhabitantNotes",
+          "treasureNotes",
+          "traps",
+          "secrets"
+        ],
         "filePathFields": {
           "img": ["IMAGE"]
         }
